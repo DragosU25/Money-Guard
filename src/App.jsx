@@ -1,7 +1,8 @@
 import "./App.css";
+import AddTransactionForm from "./components/AddTransactionForm/AddTransactionForm";
 
 function App() {
-  return <h1>Money Guard</h1>;
+  return <AddTransactionForm />;
 }
 
 export default App;
