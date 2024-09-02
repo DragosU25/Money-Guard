@@ -2,7 +2,7 @@
   "name": "money-guard",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://dragosu25.github.io/money-guard/",
+  "homepage": "https://dragosu25.github.io/Money-Guard/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
