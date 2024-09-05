@@ -3,6 +3,7 @@ import Button from "./components/commonComponents/Button";
 
 import "./App.css";
 import Modal from "./components/commonComponents/Modal/Modal";
+import Input from "./components/commonComponents/Input/Input";
 
 export default function App() {
   const [isModalVisible, setIsModalVisible] = useState(true);
@@ -47,6 +48,12 @@ export default function App() {
     <div>
       <Button variant="colored">test</Button>
       <Button>test 2</Button>
+      <Input isVisible={true} width="100%" variant="center" placeholder="00.00">
+        away
+      </Input>
+      <Input isVisible={false} width="300px" placeholder="Comment">
+        close
+      </Input>
       <Modal
         dialogRef={dialogRef}
         contRef={contRef}

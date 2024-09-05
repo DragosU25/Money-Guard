@@ -27,8 +27,6 @@ export default function Button({
 
 Button.propTypes = {
   variant: PropTypes.string,
-  // customStyles: PropTypes.string,
-  // className: PropTypes.string,
   disabled: PropTypes.bool,
   type: PropTypes.string,
   handleClick: PropTypes.func,

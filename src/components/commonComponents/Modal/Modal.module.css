@@ -7,10 +7,12 @@
   height: 100vh;
   justify-content: center;
   left: 0;
-  position: fixed;
+  padding: 0 20px;
+  position: absolute;
   top: 0;
   width: 100vw;
   z-index: 1000;
+  overflow: scroll;
 }
 
 .content {
@@ -18,15 +20,14 @@
   background: #fff;
   border: none;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   flex-shrink: 1;
-  gap: 24px;
-  height: 511px;
+  height: fit-content;
+  /* overflow: scroll; */
+  padding: 28px 20px;
   position: absolute;
-  width: 540px;
+  width: 100%;
   z-index: 100000;
-
-  width: 540px;
 
   border-radius: 8px;
   background: var(--Form-color, rgba(255, 255, 255, 0.1));
@@ -41,8 +42,8 @@
   border: none;
   cursor: pointer;
   position: absolute;
-  right: 8px;
-  top: 8px;
+  right: 20px;
+  top: 20px;
 }
 
 .closeModal svg {
@@ -52,4 +53,27 @@
   flex-shrink: 0;
   border: none;
   outline: none;
+}
+
+@media screen and (width >=768px) {
+  .modalClassName {
+    padding: 217px 114px;
+    overflow: hidden;
+  }
+
+  .content {
+    flex-shrink: 0;
+    padding: 40px 73px;
+    width: 540px;
+  }
+}
+
+@media screen and (width >=1024px) {
+  .modalClassName {
+    padding: 65px 370px;
+  }
+
+  .content {
+    width: 540px;
+  }
 }

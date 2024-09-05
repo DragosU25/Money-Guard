@@ -1,5 +1,5 @@
 .button {
-  width: 300px;
+  width: 280px;
   height: 50px;
   flex-shrink: 1;
   border: none;
@@ -18,6 +18,13 @@
 
   /* Button shadow */
   box-shadow: 1px 9px 15px 0px rgba(0, 0, 0, 0.2);
+  transition: scale 250ms ease-in-out, box-shadow 250ms ease-in-out;
+}
+
+.button:hover,
+.button:focus {
+  scale: 0.99;
+  box-shadow: rgba(0, 0, 0, 0.5) 3px 5px 8px 3px;
 }
 
 .coloredButton {
@@ -33,8 +40,8 @@
   color: var(--text-button, #623f8b);
 }
 
-@media screen and (width >=1024px) {
+@media screen and (width >=768px) {
   .button {
-    width: 280px;
+    width: 300px;
   }
 }
