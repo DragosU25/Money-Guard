@@ -35,13 +35,11 @@ a {
 }
 
 body {
-  /* background-color: #101010; */
   position: relative;
   margin: 0;
   font-family: Poppins-Regular, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: lightgray;
 }
 
 code {
