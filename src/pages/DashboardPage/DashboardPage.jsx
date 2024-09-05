@@ -4,9 +4,9 @@ import Header from "../../components/Header/Header";
 
 function DashboardPage() {
   return (
-    <>
+    <div className={styles.dashboardContainer}>
       <Header />
-    </>
+    </div>
   );
 }
 

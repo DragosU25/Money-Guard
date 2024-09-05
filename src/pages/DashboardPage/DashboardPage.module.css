@@ -1,0 +1,6 @@
+@import "../../styles/variables.css";
+
+.dashboardContainer {
+  background: var(--gradient-background);
+  min-height: 100vh;
+}

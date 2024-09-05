@@ -1,4 +1,4 @@
-/* RegistrationPage.module.css */
+@import "../../styles/variables.css";
 
 .container {
   position: relative;
@@ -6,8 +6,8 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(270deg, #2e1746 3.2%, #2e225f 99.98%);
-  overflow: hidden; /* Ascunde orice element care depășește containerul */
+  background: var(--gradient-background);
+  overflow: hidden;
 }
 
 .backgroundImage {
@@ -20,22 +20,22 @@
   background-size: cover;
   background-position: center;
   z-index: 1;
-  opacity: 0.5; /* Opacitate pentru a vedea gradientul */
+  opacity: 0.5;
 }
 
 .registrationPage {
   position: relative;
-  z-index: 2; /* Se află deasupra imaginii de fundal */
+  z-index: 2;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .registrationContainer {
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0px 4px 60px 0px rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(50px);
-  border-radius: 8px;
+  background: var(--form-background);
+  box-shadow: var(--box-shadow);
+  backdrop-filter: var(--blur);
+  border-radius: var(--border-radius);
   padding: 40px 62px;
 }
 
@@ -51,13 +51,13 @@
 }
 
 .logoContainer span {
-  color: #fbfbfb;
-  font-size: 26.963px;
+  color: var(--text-color-light);
+  font-size: var(--font-size-large);
 }
 
 @media (max-width: 768px) {
   .registrationContainer {
     width: 100%;
-    margin: 0 20px; /* Padding lateral pe mobile */
+    margin: 0 20px;
   }
 }
