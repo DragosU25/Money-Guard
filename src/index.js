@@ -5,7 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./styles/variables.module.css";
 import { BrowserRouter } from "react-router-dom";
-import "normalize.css";
+import "../node_modules/modern-normalize/modern-normalize.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
