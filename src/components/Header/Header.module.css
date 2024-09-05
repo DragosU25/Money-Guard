@@ -1,0 +1,51 @@
+.container {
+  height: 100vh;
+  background: linear-gradient(270deg, #2e1746 3.2%, #2e225f 99.98%);
+  position: relative;
+  overflow: hidden;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.logoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logoContainer img {
+  width: 23.489px;
+  height: 22.468px;
+}
+
+.logoContainer span {
+  color: #fbfbfb;
+  font-size: 17.097px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.userContainer {
+  display: flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.6);
+
+  gap: 12px;
+}
+
+.userContainer p {
+  text-align: right;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: capitalize;
+}

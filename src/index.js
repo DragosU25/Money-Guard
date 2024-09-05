@@ -4,15 +4,18 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./styles/variables.module.css";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 import { BrowserRouter } from "react-router-dom";
-import "../node_modules/modern-normalize/modern-normalize.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter basename="/Money-Guard">
+        <App />
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );
 
