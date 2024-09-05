@@ -3,7 +3,6 @@ import { logIn } from "../../services/operations";
 import { useDispatch } from "react-redux";
 import styles from "./LoginForm.module.css";
 import { Link } from "react-router-dom";
-// Ensure you have FontAwesome or Material Icons installed
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
@@ -17,9 +16,7 @@ function LoginForm() {
     e.preventDefault();
     dispatch(logIn({ email, password }))
       .unwrap()
-      .then(() => {
-        // Redirect or perform other actions on successful login
-      })
+      .then(() => {})
       .catch((error) => {
         setErrorMessage(
           error.message || "You have entered an invalid username or password."
