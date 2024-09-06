@@ -6,8 +6,9 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: var(--gradient-background);
+  background: var(--background-gradient);
   overflow: hidden;
+  padding: 0 20px;
 }
 
 .backgroundImage {
@@ -29,14 +30,23 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  margin: 0;
 }
 
 .registrationContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
   background: var(--form-background);
   box-shadow: var(--box-shadow);
   backdrop-filter: var(--blur);
   border-radius: var(--border-radius);
   padding: 40px 62px;
+  max-width: 100%;
 }
 
 .logoContainer {
@@ -56,8 +66,23 @@
 }
 
 @media (max-width: 768px) {
+  .backgroundImage {
+    display: none;
+  }
+
   .registrationContainer {
     width: 100%;
-    margin: 0 20px;
+    height: 100vh;
+    border-radius: 0;
+    padding: 0 20px;
+  }
+
+  .container {
+    padding: 0;
+  }
+
+  .imageLeft,
+  .imageRight {
+    display: none;
   }
 }

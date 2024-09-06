@@ -7,7 +7,6 @@ import LogoContainer from "../LogoContainer/LogoContainer";
 
 function Header() {
   const user = useSelector(selectUser);
-
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   return (

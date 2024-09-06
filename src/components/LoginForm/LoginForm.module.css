@@ -1,13 +1,17 @@
+@import "../../styles/variables.css";
+
 .form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 52px;
+  justify-content: center;
+  max-width: fit-content;
+  margin-top: var(--form-margin-top);
+  width: 100%; /* Make form responsive */
 }
 
 .inputWrapper {
   position: relative;
-  margin-bottom: 20px;
 }
 
 .inputIcon {
@@ -15,12 +19,18 @@
   top: 50%;
   left: 10px;
   transform: translateY(-50%);
+  color: var(--input-icon-color);
+  font-size: var(--font-size-medium);
+}
+
+.inputContainer {
+  margin-bottom: var(--input-margin-bottom);
   color: rgba(255, 255, 255, 0.4);
-  font-size: 18px;
+  width: 100%;
 }
 
 .input {
-  max-width: 100%;
+  width: 100%;
   padding: 8px 8px 8px 52px;
   border: none;
   border-bottom: 2px solid rgba(255, 255, 255, 0.4);
@@ -30,59 +40,69 @@
   outline: none;
 }
 
+.inputError {
+  margin: 2px 0 0 0;
+}
+
 .input:focus {
-  border-bottom: 2px solid #fff;
+  border-bottom: 2px solid var(--input-border-focus-color);
 }
 
 .input::placeholder {
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--input-placeholder-color);
 }
 
 .button {
-  padding: 13px 132px;
-  margin-top: 20px;
+  width: 279px;
+  padding: 13px 0;
+  margin-top: var(--button-margin-top);
   border: none;
-  border-radius: 20px;
-  background: var(
-    --button-gradient,
-    linear-gradient(97deg, #ffc727 -16.42%, #9e40ba 97.04%, #7000ff 150.71%)
-  );
-  /* Button shadow */
-  box-shadow: 1px 9px 15px 0px rgba(0, 0, 0, 0.2);
-  color: #fff;
+  border-radius: var(--border-radius);
+  background: var(--button-gradient);
+  box-shadow: var(--button-shadow);
+  color: var(--button-text-color);
   letter-spacing: 1.8px;
   text-transform: uppercase;
-  font-size: 18px;
+  font-size: var(--font-size-medium);
   cursor: pointer;
   transition: background 0.3s ease;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .button:hover {
-  background: linear-gradient(90deg, #e86805, #9e001c 70%);
+  background: var(--button-hover-gradient);
 }
 
 .error {
-  color: #ff4d4d;
-  margin-top: 10px;
-  font-size: 14px;
+  color: var(--error-color);
+  margin-top: var(--error-margin-top);
+  font-size: var(--font-size-small);
   text-align: center;
 }
 
 .navLink {
-  margin-top: 20px;
-  color: #623f8b;
+  width: 279px;
+  padding: 13px 0;
+  display: flex;
+  justify-content: center;
+  margin-top: var(--nav-link-margin-top);
+  color: var(--nav-link-color);
   padding: 13px 122px;
-  background-color: white;
-  box-shadow: 1px 9px 15px 0px rgba(0, 0, 0, 0.2);
-  border-radius: 20px;
+  background-color: var(--nav-link-background);
+  box-shadow: var(--button-shadow);
+  border-radius: var(--border-radius);
   text-align: center;
   text-decoration: none;
   letter-spacing: 1.8px;
   text-transform: uppercase;
-  font-size: 18px;
+  font-size: var(--font-size-medium);
 }
 
 .navLink:hover {
   text-decoration: underline;
+}
+
+.togglePasswordIcon {
+  position: absolute;
+  right: 3px;
+  bottom: 15px;
 }

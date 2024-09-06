@@ -1,6 +1,6 @@
 import React, { lazy, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Route, Routes } from "react-router-dom";
 import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import SharedLayout from "./components/layouts/SharedLayout/SharedLayout";
@@ -19,6 +19,7 @@ function App() {
   const RegistrationPage = lazy(() =>
     import("./pages/RegistrationPage/RegistrationPage")
   );
+
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
