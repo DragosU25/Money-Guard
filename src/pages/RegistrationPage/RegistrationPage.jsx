@@ -2,7 +2,7 @@ import React from "react";
 import RegisterForm from "../../components/RegisterForm/RegisterForm";
 import styles from "./RegistrationPage.module.css";
 
-import backgroundImage from "../../assets/images/register-background.png"; // Imaginea de fundal
+// import backgroundImage from "../../assets/images/register-background.png"; // Imaginea de fundal
 import LogoContainer from "../../components/LogoContainer/LogoContainer";
 
 function RegistrationPage() {

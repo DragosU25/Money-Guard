@@ -7,7 +7,7 @@ import SharedLayout from "./components/layouts/SharedLayout/SharedLayout";
 import { refreshUser } from "./services/operations";
 
 import "./App.css";
-import Loader from "./components/Loader/Loader";
+import Loader from "./components/commonComponents/Loader/Loader";
 
 function App() {
   const dispatch = useDispatch();
