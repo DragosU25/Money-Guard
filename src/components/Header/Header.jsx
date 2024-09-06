@@ -18,7 +18,10 @@ function Header() {
           <div className={styles.userContainer}>
             <p> {user.username}</p>
             <span>|</span>
-            <LogoutButton />
+            <div className={styles.logoutContainer}>
+              <LogoutButton />
+              <p className={styles.exit}>Exit</p>
+            </div>
           </div>
         )}
       </header>
