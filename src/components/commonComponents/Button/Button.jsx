@@ -10,6 +10,7 @@ export default function Button({
   variant = "",
   handleClick,
   disabled,
+  className,
 }) {
   return (
     <button
@@ -17,6 +18,7 @@ export default function Button({
       onClick={handleClick}
       type={type}
       className={clsx(
+        className,
         styles.button,
         variant === "colored" ? styles.coloredButton : styles.whiteButton
       )}>

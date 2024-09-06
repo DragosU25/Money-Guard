@@ -18,13 +18,15 @@
 
   /* Button shadow */
   box-shadow: 1px 9px 15px 0px rgba(0, 0, 0, 0.2);
-  transition: scale 250ms ease-in-out, box-shadow 250ms ease-in-out;
+  transition: scale 250ms ease-in-out, box-shadow 250ms ease-in-out,
+    background 250ms ease-in-out;
 }
 
 .button:hover,
 .button:focus {
   scale: 0.99;
   box-shadow: rgba(0, 0, 0, 0.5) 3px 5px 8px 3px;
+  background: linear-gradient(90deg, #e86805, #9e001c 70%);
 }
 
 .coloredButton {
