@@ -1,16 +1,12 @@
-import { Navigate, useLocation } from "react-router-dom";
+import React from "react";
+import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectIsLoggedIn } from "../../services/auth";
+import { selectAuth } from "../../services/auth"; // Import selector
 
-const RestrictedRoute = ({ component, redirectTo = "/dashboard" }) => {
-  const location = useLocation();
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+const RestrictedRoute = ({ component, redirectTo }) => {
+  const { isLoggedIn } = useSelector(selectAuth);
 
-  return isLoggedIn ? (
-    <Navigate to={location.state?.from ? location.state?.from : redirectTo} />
-  ) : (
-    component
-  );
+  return isLoggedIn ? <Navigate to={redirectTo} /> : component;
 };
 
 export default RestrictedRoute;

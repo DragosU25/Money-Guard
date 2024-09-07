@@ -1,32 +1,21 @@
 import { useState } from "react";
 
-const useFormValidation = (initialValues) => {
-  const [fields, setFields] = useState(initialValues);
+const useFormValidation = (initialState, validateFn) => {
+  const [fields, setFields] = useState(initialState);
   const [errors, setErrors] = useState({});
 
   const validateFields = () => {
-    let isValid = true;
-    let newErrors = {};
-
-    // Validare simplă exemplu
-    if (!fields.email) {
-      newErrors.email = "Email is required";
-      isValid = false;
-    } else if (!/^[\w-.]+@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(fields.email)) {
-      newErrors.email = "Enter a valid email";
-      isValid = false;
-    }
-
-    if (!fields.password) {
-      newErrors.password = "Password is required";
-      isValid = false;
-    }
-
+    const newErrors = validateFn(fields);
     setErrors(newErrors);
-    return isValid;
+    return Object.keys(newErrors).length === 0;
   };
 
-  return { fields, setFields, errors, validateFields };
+  return {
+    fields,
+    setFields,
+    errors,
+    validateFields,
+  };
 };
 
 export default useFormValidation;

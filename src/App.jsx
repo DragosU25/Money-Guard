@@ -1,16 +1,16 @@
 import React, { lazy, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import SharedLayout from "./components/layouts/SharedLayout/SharedLayout";
 import { refreshUser } from "./services/operations";
-
-import "./App.css";
 import Loader from "./components/Loader/Loader";
+import { selectAuth } from "./services/auth";
 
 function App() {
   const dispatch = useDispatch();
+  const { isRefreshing } = useSelector(selectAuth);
 
   const DashboardPage = lazy(() =>
     import("./pages/DashboardPage/DashboardPage")
@@ -23,6 +23,10 @@ function App() {
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
+
+  if (isRefreshing) {
+    return <Loader />;
+  }
 
   return (
     <React.Suspense fallback={<Loader />}>

@@ -4,40 +4,46 @@ import { logIn } from "../../services/operations";
 import styles from "./LoginForm.module.css";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEnvelope,
+  faLock,
+  faEye,
+  faEyeSlash,
+} from "@fortawesome/free-solid-svg-icons";
 import useFormValidation from "../../Hooks/useFormValidation";
+import validateLogin from "../../Hooks/validateLogin";
 import usePasswordVisibility from "../../Hooks/usePasswordVisibility";
 import useFormTouched from "../../Hooks/useFormTouched";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import Button from "../commonComponents/Button/Button";
 
 function LoginForm() {
-  const { fields, setFields, errors, validateFields } = useFormValidation({
-    email: "",
-    password: "",
-  });
+  const { fields, setFields, errors, validateFields } = useFormValidation(
+    {
+      email: "",
+      password: "",
+    },
+    validateLogin
+  );
   const { passwordVisible, togglePasswordVisibility } = usePasswordVisibility();
   const { touched, handleBlur } = useFormTouched();
   const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate fields
     if (!validateFields()) return;
 
-    dispatch(logIn(fields))
-      .unwrap()
-      .then(() => {
-        // Handle successful login
-      })
-      .catch((error) => {
-        setFields((prevFields) => ({
-          ...prevFields,
-          errorMessage:
-            error.message ||
-            "You have entered an invalid username or password.",
-        }));
-      });
+    try {
+      await dispatch(logIn(fields)).unwrap();
+      console.log("Login successful");
+    } catch (error) {
+      console.error("Login failed:", error);
+      setFields((prevFields) => ({
+        ...prevFields,
+        errorMessage:
+          error.message || "You have entered an invalid username or password.",
+      }));
+    }
   };
 
   return (
@@ -54,15 +60,10 @@ function LoginForm() {
             placeholder="E-mail"
             required
           />
-          {touched.email && errors.email === "" && (
-            <p className={styles.inputError}>Required</p>
-          )}
-          {touched.email &&
-            errors.email &&
-            !/^[\w-.]+@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(fields.email) && (
-              <p className={styles.inputError}>Enter a valid email</p>
-            )}
         </div>
+        {touched.email && !fields.email && (
+          <p className={styles.inputError}>Required</p>
+        )}
       </div>
       <div className={styles.inputContainer}>
         <div className={styles.inputWrapper}>
@@ -81,16 +82,16 @@ function LoginForm() {
             className={styles.togglePasswordIcon}
             onClick={togglePasswordVisibility}
           />
-          {touched.password && errors.password === "" && (
-            <p className={styles.inputError}>Required</p>
-          )}
         </div>
+        {touched.password && !fields.password && (
+          <p className={styles.inputError}>Required</p>
+        )}
       </div>
       {fields.errorMessage && (
         <p className={styles.error}>{fields.errorMessage}</p>
       )}
       <button type="submit" className={styles.button}>
-        Log in
+        Log In
       </button>
       <Link to="/register" className={styles.navLink}>
         Register
