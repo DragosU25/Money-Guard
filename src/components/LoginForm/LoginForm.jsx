@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { logIn } from "../../services/operations";
+import { logIn } from "../../redux/auth/operationsAuth";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Input from "../commonComponents/Input/Input";

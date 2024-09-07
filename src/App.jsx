@@ -1,24 +1,32 @@
 import React, { lazy, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Route, Routes } from "react-router-dom";
 import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import SharedLayout from "./components/layouts/SharedLayout/SharedLayout";
-import { refreshUser } from "./services/operations";
+import { refreshUser } from "./redux/auth/operationsAuth";
+import NotFoundPage from "./pages/NotFoundPage";
 
-import "./App.css";
 import Loader from "./components/commonComponents/Loader/Loader";
+import "./App.css";
+
+const LazyLoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
+
+const DashboardPage = lazy(() => import("./pages/DashboardPage/DashboardPage"));
+
+const HomeTabPage = lazy(() => import("./pages/HomeTab/HomeTab"));
+
+const StatisticsTabPage = lazy(() =>
+  import("./pages/StatisticsTab/StatisticsTab")
+);
+
+const LazyRegistrationPage = lazy(() =>
+  import("./pages/RegistrationPage/RegistrationPage")
+);
 
 function App() {
   const dispatch = useDispatch();
 
-  const DashboardPage = lazy(() =>
-    import("./pages/DashboardPage/DashboardPage")
-  );
-  const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
-  const RegistrationPage = lazy(() =>
-    import("./pages/RegistrationPage/RegistrationPage")
-  );
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
@@ -28,39 +36,59 @@ function App() {
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route
-            index
+            path="/login"
             element={
-              <RestrictedRoute
-                redirectTo="/dashboard"
-                component={<LoginPage />}
-              />
+              <RestrictedRoute redirectTo="/" component={<LazyLoginPage />} />
             }
           />
+
           <Route
             path="/register"
             element={
               <RestrictedRoute
-                redirectTo="/dashboard"
-                component={<RegistrationPage />}
+                redirectTo="/"
+                component={<LazyRegistrationPage />}
               />
             }
           />
+
           <Route
-            path="/login"
-            element={
-              <RestrictedRoute
-                redirectTo="/dashboard"
-                component={<LoginPage />}
-              />
-            }
-          />
-          <Route
-            path="/dashboard"
+            path="/"
             element={
               <PrivateRoute redirectTo="/login" component={<DashboardPage />} />
-            }
-          />
+            }>
+            <Route path="" element={<HomeTabPage />} />
+
+            <Route
+              path="/home"
+              element={
+                <PrivateRoute redirectTo="/login" component={<HomeTabPage />} />
+              }
+            />
+
+            <Route
+              path="/statistics"
+              element={
+                <PrivateRoute
+                  redirectTo="/login"
+                  component={<StatisticsTabPage />}
+                />
+              }
+            />
+          </Route>
+
+          <Route path="*" element={<NotFoundPage initPage="/" />} />
         </Route>
+
+        {/* <Route
+          index
+          element={
+            <RestrictedRoute
+              redirectTo="/dashboard"
+              component={<LoginPage />}
+            />
+          }
+        /> */}
       </Routes>
     </React.Suspense>
   );

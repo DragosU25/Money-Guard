@@ -40,9 +40,9 @@
   box-shadow: var(--box-shadow);
   backdrop-filter: var(--blur);
   height: 100%;
+  padding: 0 20px;
   padding-top: 97px;
   width: 100%;
-  margin: 0 20px;
 }
 
 .logoContainer {
@@ -69,7 +69,6 @@
     padding: 80px 62px;
     height: fit-content;
     width: fit-content;
-    margin: 0;
   }
 
   .imageLeft img,

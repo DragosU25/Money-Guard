@@ -3,4 +3,7 @@
 .dashboardContainer {
   background: var(--gradient-background);
   min-height: 100vh;
+  flex-grow: 1;
+  overflow: auto;
+  color: white;
 }

@@ -1,18 +1,12 @@
-import { Navigate, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { selectIsLoggedIn, selectIsRefreshing } from "../../services/auth";
+import { Navigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 
-const PrivateRoute = ({ component, redirectTo = "/dashboard" }) => {
-  const location = useLocation();
-  const isLoggedIn = useSelector(selectIsLoggedIn);
-  const isRefreshing = useSelector(selectIsRefreshing);
+const PrivateRoute = ({ component, redirectTo = "/" }) => {
+  const { isLoggedIn, isRefreshing } = useAuth();
+
   const shouldRedirect = !isLoggedIn && !isRefreshing;
 
-  return shouldRedirect ? (
-    <Navigate to={redirectTo} state={{ from: location }} />
-  ) : (
-    component
-  );
+  return shouldRedirect ? <Navigate to={redirectTo} /> : component;
 };
 
 export default PrivateRoute;

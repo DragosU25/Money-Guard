@@ -5,7 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./styles/variables.css";
 import { Provider } from "react-redux";
-import { store } from "./store/store";
+import { store } from "./redux/store";
 import { BrowserRouter } from "react-router-dom";
 // import "normalize.css";
 

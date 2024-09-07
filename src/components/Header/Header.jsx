@@ -1,14 +1,12 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import LogoutButton from "../LogoutButton/LogoutButton";
-import { selectIsLoggedIn, selectUser } from "../../services/auth";
 import styles from "./Header.module.css";
 import LogoContainer from "../LogoContainer/LogoContainer";
 
-function Header() {
-  const user = useSelector(selectUser);
+import { useAuth } from "../../hooks/useAuth";
 
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+function Header() {
+  const { isLoggedIn, user } = useAuth();
 
   return (
     <div className={styles.container}>
