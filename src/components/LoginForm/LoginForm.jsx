@@ -10,10 +10,10 @@ import {
   faEye,
   faEyeSlash,
 } from "@fortawesome/free-solid-svg-icons";
-import useFormValidation from "../../Hooks/useFormValidation";
-import validateLogin from "../../Hooks/validateLogin";
-import usePasswordVisibility from "../../Hooks/usePasswordVisibility";
-import useFormTouched from "../../Hooks/useFormTouched";
+import useFormValidation from "../../hooks/useFormValidation";
+import validateLogin from "../../hooks/validateLogin";
+import usePasswordVisibility from "../../hooks/usePasswordVisibility";
+import useFormTouched from "../../hooks/useFormTouched";
 import Button from "../commonComponents/Button/Button";
 
 function LoginForm() {

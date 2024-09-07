@@ -11,11 +11,11 @@ import {
   faEye,
   faEyeSlash,
 } from "@fortawesome/free-solid-svg-icons";
-import useFormValidation from "../../Hooks/useFormValidation";
-import validateRegister from "../../Hooks/validateRegister";
-import usePasswordVisibility from "../../Hooks/usePasswordVisibility";
-import usePasswordStrength from "../../Hooks/usePasswordStrength";
-import useFormTouched from "../../Hooks/useFormTouched";
+import useFormValidation from "../../hooks/useFormValidation";
+import validateRegister from "../../hooks/validateRegister";
+import usePasswordVisibility from "../../hooks/usePasswordVisibility";
+import usePasswordStrength from "../../hooks/usePasswordStrength";
+import useFormTouched from "../../hooks/useFormTouched";
 
 function RegisterForm() {
   const { fields, setFields, errors, validateFields } = useFormValidation(
