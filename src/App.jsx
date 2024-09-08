@@ -9,17 +9,15 @@ import NotFoundPage from "./pages/NotFoundPage";
 
 import Loader from "./components/commonComponents/Loader/Loader";
 
-import { useAuth } from "./hooks/useAuth";
-
 import "./App.css";
 
 const LazyLoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
 
 const DashboardPage = lazy(() => import("./pages/DashboardPage/DashboardPage"));
 
-const HomeTabPage = lazy(() => import("./pages/HomeTab/HomeTab"));
+const LazyHomeTabPage = lazy(() => import("./pages/HomeTab/HomeTab"));
 
-const StatisticsTabPage = lazy(() =>
+const LazyStatisticsTabPage = lazy(() =>
   import("./pages/StatisticsTab/StatisticsTab")
 );
 
@@ -28,9 +26,6 @@ const LazyRegistrationPage = lazy(() =>
 );
 
 function App() {
-  const { isLoggedIn } = useAuth();
-  console.log(isLoggedIn);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -63,12 +58,15 @@ function App() {
             element={
               <PrivateRoute redirectTo="/login" component={<DashboardPage />} />
             }>
-            <Route path="" element={<HomeTabPage />} />
+            <Route path="" element={<LazyHomeTabPage />} />
 
             <Route
               path="/home"
               element={
-                <PrivateRoute redirectTo="/login" component={<HomeTabPage />} />
+                <PrivateRoute
+                  redirectTo="/login"
+                  component={<LazyHomeTabPage />}
+                />
               }
             />
 
@@ -77,7 +75,7 @@ function App() {
               element={
                 <PrivateRoute
                   redirectTo="/login"
-                  component={<StatisticsTabPage />}
+                  component={<LazyStatisticsTabPage />}
                 />
               }
             />
@@ -85,16 +83,6 @@ function App() {
 
           <Route path="*" element={<NotFoundPage initPage="/" />} />
         </Route>
-
-        {/* <Route
-          index
-          element={
-            <RestrictedRoute
-              redirectTo="/dashboard"
-              component={<LoginPage />}
-            />
-          }
-        /> */}
       </Routes>
     </React.Suspense>
   );
