@@ -1,0 +1,28 @@
+.sidebarContainer {
+  background-color: burlywood;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  width: 100%;
+}
+
+.linksContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (width >= 768px) {
+  .sidebarContainer {
+    flex-direction: row;
+
+    height: 336px;
+  }
+}
+
+@media screen and (width >= 1024px) {
+  .sidebarContainer {
+    flex-direction: column;
+    height: 100vh;
+    width: 27.27%;
+  }
+}

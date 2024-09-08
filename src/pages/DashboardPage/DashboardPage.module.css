@@ -1,0 +1,21 @@
+@import "../../styles/variables.css";
+
+.dashboardContainer {
+  background: var(--gradient-background);
+  min-height: 100vh;
+  flex-grow: 1;
+  overflow: auto;
+  color: white;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+@media screen and (width >= 1024px) {
+  .main {
+    flex-direction: row;
+  }
+}

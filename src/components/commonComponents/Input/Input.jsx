@@ -13,14 +13,16 @@ export default function Input({
   className,
   name,
   handleChange,
-  children,
   width,
-  isVisible,
   value,
+  paddingLeft,
+  autoComplete,
 }) {
   return (
-    <div style={{ width: `${width}` }} className={inputContainer}>
+    <div style={{ width: `${width}` }} className={styles.inputContainer}>
       <input
+        autoComplete={autoComplete}
+        style={{ paddingLeft: `${paddingLeft}` }}
         onChange={handleChange}
         name={name}
         className={clsx(
@@ -33,7 +35,6 @@ export default function Input({
         required={required}
         value={value}
       />
-      {isVisible && <p className={styles.inputInfo}>{children}</p>}
     </div>
   );
 }
@@ -41,12 +42,12 @@ export default function Input({
 Input.propTypes = {
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  children: PropTypes.string,
+  paddingLeft: PropTypes.string,
+  autoComplete: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   name: PropTypes.string,
   type: PropTypes.string,
   variant: PropTypes.string,
   handleChange: PropTypes.func,
   required: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   placeholder: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  isVisible: PropTypes.bool,
 };

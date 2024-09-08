@@ -1,0 +1,14 @@
+@import "../../styles/variables.css";
+
+.icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--text-color);
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}

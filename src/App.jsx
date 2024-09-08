@@ -1,11 +1,91 @@
-import React from "react";
+import React, { lazy, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Route, Routes } from "react-router-dom";
+import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import SharedLayout from "./components/layouts/SharedLayout/SharedLayout";
+import { refreshUser } from "./redux/auth/operationsAuth";
+import NotFoundPage from "./pages/NotFoundPage";
+
+import Loader from "./components/commonComponents/Loader/Loader";
 
 import "./App.css";
 
-export default function App() {
+const LazyLoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
+
+const DashboardPage = lazy(() => import("./pages/DashboardPage/DashboardPage"));
+
+const LazyHomeTabPage = lazy(() => import("./pages/HomeTab/HomeTab"));
+
+const LazyStatisticsTabPage = lazy(() =>
+  import("./pages/StatisticsTab/StatisticsTab")
+);
+
+const LazyRegistrationPage = lazy(() =>
+  import("./pages/RegistrationPage/RegistrationPage")
+);
+
+function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+
   return (
-    <>
-      <h1>Money Heist</h1>
-    </>
+    <React.Suspense fallback={<Loader />}>
+      <Routes>
+        <Route path="/" element={<SharedLayout />}>
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute redirectTo="/" component={<LazyLoginPage />} />
+            }
+          />
+
+          <Route
+            path="/register"
+            element={
+              <RestrictedRoute
+                redirectTo="/"
+                component={<LazyRegistrationPage />}
+              />
+            }
+          />
+
+          <Route
+            path="/"
+            element={
+              <PrivateRoute redirectTo="/login" component={<DashboardPage />} />
+            }>
+            <Route path="" element={<LazyHomeTabPage />} />
+
+            <Route
+              path="/home"
+              element={
+                <PrivateRoute
+                  redirectTo="/login"
+                  component={<LazyHomeTabPage />}
+                />
+              }
+            />
+
+            <Route
+              path="/statistics"
+              element={
+                <PrivateRoute
+                  redirectTo="/login"
+                  component={<LazyStatisticsTabPage />}
+                />
+              }
+            />
+          </Route>
+
+          <Route path="*" element={<NotFoundPage initPage="/" />} />
+        </Route>
+      </Routes>
+    </React.Suspense>
   );
 }
+
+export default App;
