@@ -1,18 +1,12 @@
 @import "../../styles/variables.css";
 
-.container {
+.header {
   height: 60px;
   background: linear-gradient(270deg, #2e1746 3.2%, #2e225f 99.98%);
-  /* position: relative; */
-  /* overflow: hidden; */
-}
-
-header {
   display: flex;
   height: 100%;
   justify-content: space-between;
   align-items: center;
-  max-width: 1280px;
   margin: 0 auto;
   padding: 12px 20px 11.51px 20px;
 }
@@ -65,11 +59,8 @@ header {
 }
 
 @media screen and (width >=768px) {
-  .container {
+  .header {
     height: 80px;
-  }
-
-  header {
     padding: 16px 28px 15.53px 32px;
   }
 
@@ -94,7 +85,7 @@ header {
 }
 
 @media screen and (width >=1024px) {
-  header {
+  .header {
     padding: 16px 28px 15.53px 16px;
   }
 }

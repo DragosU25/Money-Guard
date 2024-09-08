@@ -8,6 +8,9 @@ import { refreshUser } from "./redux/auth/operationsAuth";
 import NotFoundPage from "./pages/NotFoundPage";
 
 import Loader from "./components/commonComponents/Loader/Loader";
+
+import { useAuth } from "./hooks/useAuth";
+
 import "./App.css";
 
 const LazyLoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
@@ -25,6 +28,9 @@ const LazyRegistrationPage = lazy(() =>
 );
 
 function App() {
+  const { isLoggedIn } = useAuth();
+  console.log(isLoggedIn);
+
   const dispatch = useDispatch();
 
   useEffect(() => {

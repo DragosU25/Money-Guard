@@ -7,3 +7,15 @@
   overflow: auto;
   color: white;
 }
+
+.main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+@media screen and (width >= 1024px) {
+  .main {
+    flex-direction: row;
+  }
+}

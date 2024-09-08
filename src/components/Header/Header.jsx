@@ -9,21 +9,19 @@ function Header() {
   const { isLoggedIn, user } = useAuth();
 
   return (
-    <div className={styles.container}>
-      <header>
-        <LogoContainer className={styles.logoContainer} />
-        {isLoggedIn && (
-          <div className={styles.userContainer}>
-            <p> {user.username}</p>
-            <span>|</span>
-            <div className={styles.logoutContainer}>
-              <LogoutButton />
-              <p className={styles.exit}>Exit</p>
-            </div>
+    <header className={styles.header}>
+      <LogoContainer className={styles.logoContainer} />
+      {isLoggedIn && (
+        <div className={styles.userContainer}>
+          <p> {user.username}</p>
+          <span>|</span>
+          <div className={styles.logoutContainer}>
+            <LogoutButton />
+            <p className={styles.exit}>Exit</p>
           </div>
-        )}
-      </header>
-    </div>
+        </div>
+      )}
+    </header>
   );
 }
 
