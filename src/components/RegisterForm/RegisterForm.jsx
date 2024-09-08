@@ -200,7 +200,8 @@ function RegisterForm() {
                   : passwordStrength < 4
                   ? "orange"
                   : "green",
-            }}></div>
+            }}
+          ></div>
         </div>
       </div>
 
