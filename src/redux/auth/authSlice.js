@@ -82,6 +82,5 @@ const authSlice = createSlice({
   },
 });
 
-// ! nu ai actions in slice !!!
-// export const { loginSucces } = authSlice.actions;
+
 export const authReducer = authSlice.reducer;
