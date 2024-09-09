@@ -1,24 +1,23 @@
 import React from "react";
 import LogoutButton from "../LogoutButton/LogoutButton";
-import styles from "./Header.module.css";
 import LogoContainer from "../LogoContainer/LogoContainer";
 
 import { useAuth } from "../../hooks/useAuth";
+import clsx from "clsx";
 
-function Header() {
+import styles from "./Header.module.css";
+
+function Header({ handleLogoutModal }) {
   const { isLoggedIn, user } = useAuth();
 
   return (
-    <header className={styles.header}>
+    <header className={clsx(styles.header)}>
       <LogoContainer className={styles.logoContainer} />
       {isLoggedIn && (
         <div className={styles.userContainer}>
           <p> {user.username}</p>
           <span>|</span>
-          <div className={styles.logoutContainer}>
-            <LogoutButton />
-            <p className={styles.exit}>Exit</p>
-          </div>
+          <LogoutButton handleLogoutModal={handleLogoutModal} />
         </div>
       )}
     </header>

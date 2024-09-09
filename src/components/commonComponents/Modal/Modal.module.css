@@ -1,38 +1,44 @@
+@import "../../../styles/variables.css";
+
 .modalClassName {
   align-items: center;
   display: flex;
+  flex-direction: column;
   backdrop-filter: blur(3.5px);
   background: rgba(34, 13, 91, 0.23);
   border: none;
+  color: var(--transparency-60);
   height: 100vh;
   justify-content: center;
   left: 0;
-  padding: 0 20px;
-  position: absolute;
+  position: fixed;
   top: 0;
-  width: 100vw;
+  width: 100%;
   z-index: 1000;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .content {
   align-items: center;
-  background: #fff;
+  background: var(--form-background);
   border: none;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   flex-shrink: 1;
-  height: fit-content;
-  /* overflow: scroll; */
-  padding: 28px 20px;
+  line-height: 1.33;
+  overflow: hidden;
   position: absolute;
-  width: 100%;
+  top: 0;
+  left: 0;
   z-index: 100000;
 
-  border-radius: 8px;
-  background: var(--Form-color, rgba(255, 255, 255, 0.1));
+  inset: 0px;
+  overflow: auto;
 
-  /* form effects */
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
   box-shadow: 0px 4px 60px 0px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(50px);
 }
@@ -57,23 +63,20 @@
 
 @media screen and (width >=768px) {
   .modalClassName {
-    padding: 217px 114px;
+    height: 100%;
     overflow: hidden;
   }
 
   .content {
+    border-radius: 8px;
     flex-shrink: 0;
-    padding: 40px 73px;
-    width: 540px;
-  }
-}
-
-@media screen and (width >=1024px) {
-  .modalClassName {
-    padding: 65px 370px;
-  }
-
-  .content {
-    width: 540px;
+    height: fit-content;
+    justify-content: center;
+    overflow: hidden;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: fit-content;
   }
 }

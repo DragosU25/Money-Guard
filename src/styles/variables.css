@@ -24,4 +24,6 @@
   --font-size-small: 16px;
   --font-weight-normal: 400;
   --border-radius: 8px;
+  --transparency-60: hsla(0, 0%, 100%, 0.6);
+  --icon-violet: #734aef;
 }

@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { HiX } from "react-icons/hi";
 
 import styles from "./Modal.module.css";
+import clsx from "clsx";
 
 function Modal({
   isModalVisible,
@@ -10,6 +11,8 @@ function Modal({
   children,
   dialogRef,
   contRef,
+  modalContentClassName,
+  closeButton,
 }) {
   if (!isModalVisible) {
     return;
@@ -17,17 +20,19 @@ function Modal({
 
   return (
     isModalVisible && (
-      <dialog ref={dialogRef} className={styles.modalClassName}>
-        <div ref={contRef} className={styles.content}>
+      <section ref={dialogRef} className={styles.modalClassName}>
+        <div
+          ref={contRef}
+          className={clsx(styles.content, modalContentClassName)}>
           <button
-            className={styles.closeModal}
+            className={clsx(styles.closeModal, closeButton)}
             id="closeModal"
             onClick={handleModalClose}>
             <HiX size="16px" />
           </button>
           {children}
         </div>
-      </dialog>
+      </section>
     )
   );
 }

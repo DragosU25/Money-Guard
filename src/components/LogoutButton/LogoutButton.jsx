@@ -1,23 +1,19 @@
 import React from "react";
 
-import { useDispatch } from "react-redux";
-import { logOut } from "../../redux/auth/operationsAuth";
-
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import styles from "./LogoutButon.module.css";
 
-function LogoutButton() {
-  const dispatch = useDispatch();
-
-  const handleLogout = () => {
-    dispatch(logOut());
-  };
-
+function LogoutButton({ handleLogoutModal }) {
   return (
-    <button onClick={handleLogout}>
+    <button
+      className={styles.logoutContainer}
+      onClick={() => {
+        handleLogoutModal();
+      }}>
       <FontAwesomeIcon icon={faRightFromBracket} className={styles.icon} />
+      <span className={styles.exit}>Exit</span>
     </button>
   );
 }
