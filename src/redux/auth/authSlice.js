@@ -8,7 +8,7 @@ const initialState = {
   isLoggedIn: false,
   isRefreshing: false,
   error: null,
-  balance: "",
+  balance: null,
 };
 
 const handlePending = (state) => {
@@ -37,14 +37,14 @@ const authSlice = createSlice({
     builder
       .addCase(register.pending, handlePending)
       .addCase(register.fulfilled, (state, action) => {
-        console.log(action.payload);
+        // console.log(action.payload);
 
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.error = null;
         state.isLoading = false;
         state.isLoggedIn = true;
-        state.balance = "";
+        state.balance = Number(action.payload.balance);
       })
       .addCase(register.rejected, handleRejected)
 
@@ -57,7 +57,7 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isLoggedIn = true;
         state.error = null;
-        state.balance = payload.balance;
+        state.balance = Number(payload.balance);
       })
       .addCase(logIn.rejected, handleRejected)
 
@@ -86,7 +86,7 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         state.isRefreshing = false;
         state.isLoading = false;
-        state.balance = payload.balance;
+        state.balance = Number(payload.balance);
       })
       .addCase(refreshUser.rejected, handleRejected);
   },
