@@ -6,6 +6,7 @@ import {
   selectError,
   selectIsRefreshing,
   selectIsLoading,
+  selectBalance,
 } from "../redux/auth/selectorsAuth";
 
 export const useAuth = () => {
@@ -15,6 +16,7 @@ export const useAuth = () => {
   const errorAuth = useSelector(selectError);
   const isRefreshing = useSelector(selectIsRefreshing);
   const isLoadingAuth = useSelector(selectIsLoading);
+  const balanceAuth = useSelector(selectBalance);
 
   return {
     tokenAuth,
@@ -23,5 +25,6 @@ export const useAuth = () => {
     errorAuth,
     isRefreshing,
     isLoadingAuth,
+    balanceAuth,
   };
 };
