@@ -1,8 +1,21 @@
 import React from "react";
 
+import { useRate } from "../../hooks/useRate";
+
 import styles from "./Currency.module.css";
 
 export default function Currency() {
+  const { rate } = useRate();
+  // console.log(rate);
+  // console.log(rate.rates.EUR);
+  // console.log(rate?.rates?.RON);
+
+  const usdSell = `${Number(rate?.rates?.RON).toFixed(2)}`;
+  const usdBuy = `${Number(usdSell * 1.1).toFixed(2)}`;
+
+  const eurSell = `${Number(rate?.rates?.RON * 1.01).toFixed(2)}`;
+  const eurBuy = `${Number(eurSell * 1.1).toFixed(2)}`;
+
   return (
     <div className={styles.mainContainer}>
       <div className={styles.titlesContainer}>
@@ -13,19 +26,19 @@ export default function Currency() {
       <div className={styles.currenciesContainer}>
         <div className={styles.currencyContainer}>
           <span className={styles.currency}>USD</span>
-          <span className={styles.currency}>27.55</span>
-          <span className={styles.currency}>27.65</span>
+          <span className={styles.currency}>{usdBuy}</span>
+          <span className={styles.currency}>{usdSell}</span>
         </div>
         <div className={styles.currencyContainer}>
           <span className={styles.currency}>EUR</span>
-          <span className={styles.currency}>30.00</span>
-          <span className={styles.currency}>30.10</span>
+          <span className={styles.currency}>{eurBuy}</span>
+          <span className={styles.currency}>{eurSell}</span>
         </div>
       </div>
       <div className={styles.graphContainer}>
         <div className={styles.graphStrokeContainer}>
           <div className={styles.graphStrokeElipseLeftContainer}>
-            <span className={styles.graphStrokeElipseNumber}>27.55</span>
+            <span className={styles.graphStrokeElipseNumber}>{usdBuy}</span>
             <svg
               className={styles.graphStrokeElipseSvg}
               xmlns="http://www.w3.org/2000/svg"
@@ -44,7 +57,7 @@ export default function Currency() {
             </svg>
           </div>
           <div className={styles.graphStrokeElipseRightContainer}>
-            <span className={styles.graphStrokeElipseNumber}>30.00</span>
+            <span className={styles.graphStrokeElipseNumber}>{eurBuy}</span>
             <svg
               className={styles.graphStrokeElipseSvg}
               xmlns="http://www.w3.org/2000/svg"
