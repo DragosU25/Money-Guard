@@ -4,7 +4,8 @@
   gap: 11.8px;
   height: 80px;
   padding: 8px 32px 11.2px;
-  width: 280px;
+  width: fit-content;
+  min-width: 280px;
 
   border-radius: 8px;
   background: rgba(82, 59, 126, 0.6);
@@ -46,6 +47,7 @@
 
 @media screen and (width >= 768px) {
   .mainCont {
+    min-width: fit-content;
     width: 100%;
   }
 }

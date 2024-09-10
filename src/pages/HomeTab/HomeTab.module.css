@@ -15,7 +15,17 @@
 }
 
 @media screen and (width >= 768px) {
+  .homeTabContainer {
+    margin-top: 20px;
+  }
+
   .balanceContainer {
     display: none;
+  }
+}
+
+@media screen and (width >= 1024px) {
+  .homeTabContainer {
+    margin: 0;
   }
 }
