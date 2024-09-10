@@ -23,6 +23,7 @@ const StyledLink = styled(NavLink)`
     svg {
       stroke: white;
       filter: drop-shadow(0px 3px 10px rgba(74, 86, 226, 0.5));
+      background: blue;
     }
 
     ,

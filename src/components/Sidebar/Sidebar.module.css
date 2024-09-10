@@ -49,6 +49,7 @@
 .link svg {
   height: 36px;
   width: 36px;
+  border-radius: 8px;
 }
 
 .span {
@@ -83,13 +84,13 @@
   .sidebarLeftContainer {
     display: flex;
     flex-direction: column;
-    /* height: 100%; */
+    height: 100%;
     width: calc((100% - 32px) / 2);
   }
 
   .linksContainer {
     margin-top: 40px;
-    margin-bottom: 29px;
+    margin-bottom: 28px;
   }
 
   .nav {
@@ -121,9 +122,11 @@
   }
 
   .currencyContainer {
-    display: inherit;
+    justify-content: center;
+    align-items: center;
+    display: flex;
     width: calc((100% - 32px) / 2);
-    height: fit-content;
+    height: 100%;
   }
 }
 
@@ -131,13 +134,14 @@
   .sidebarContainer {
     border-right: 1px solid white;
     flex-direction: column;
-    height: calc(100vh - 80px);
+    height: -webkit-fill-available;
     padding: 0;
-    width: 27.27%;
+    width: fit-content;
   }
 
   .sidebarLeftContainer {
     width: 100%;
+    height: fit-content;
   }
 
   .linksContainer {
@@ -149,5 +153,6 @@
   .currencyContainer {
     width: 100%;
     flex-grow: 1;
+    height: fit-content;
   }
 }

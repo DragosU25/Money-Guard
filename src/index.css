@@ -14,8 +14,9 @@ code {
     monospace;
 }
 
-/* @media screen and (width <= 320px) {
+@media screen and (width >= 1024px) {
   body {
+    overflow: hidden;
     background: linear-gradient(
       270deg,
       var(--secondary-color) 3.2%,
@@ -25,4 +26,4 @@ code {
     -webkit-backdrop-filter: blur(50px);
     backdrop-filter: blur(50px);
   }
-} */
+}
