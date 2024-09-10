@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkmoney_guard=self.webpackChunkmoney_guard||[]).push([[870],{349:(r,e,n)=>{n.d(e,{A:()=>a});n(43);var u=n(579);function a(){return(0,u.jsx)("div",{children:"Currency"})}},489:(r,e,n)=>{n.r(e),n.d(e,{default:()=>c});n(43);var u=n(349),a=n(579);function c(){return(0,a.jsx)(u.A,{})}}}]);
+//# sourceMappingURL=870.fed0c8ca.chunk.js.map
