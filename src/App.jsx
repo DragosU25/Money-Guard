@@ -17,6 +17,10 @@ const DashboardPage = lazy(() => import("./pages/DashboardPage/DashboardPage"));
 
 const LazyHomeTabPage = lazy(() => import("./pages/HomeTab/HomeTab"));
 
+const LazyCurrencyPage = lazy(() =>
+  import("./pages/CurrencyPage/CurrencyPage")
+);
+
 const LazyStatisticsTabPage = lazy(() =>
   import("./pages/StatisticsTab/StatisticsTab")
 );
@@ -76,6 +80,16 @@ function App() {
                 <PrivateRoute
                   redirectTo="/login"
                   component={<LazyStatisticsTabPage />}
+                />
+              }
+            />
+
+            <Route
+              path="/currency"
+              element={
+                <PrivateRoute
+                  redirectTo="/login"
+                  component={<LazyCurrencyPage />}
                 />
               }
             />

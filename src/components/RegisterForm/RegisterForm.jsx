@@ -7,18 +7,29 @@ import { faEnvelope, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import Input from "../commonComponents/Input/Input";
 import Button from "../commonComponents/Button";
 import useToggle from "../../hooks/useToggle";
-
-import { VscEye } from "react-icons/vsc";
-import { VscEyeClosed } from "react-icons/vsc";
-
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { VscEye, VscEyeClosed } from "react-icons/vsc";
+import useFormValidation from "../../hooks/useFormValidation";
+import validateRegister from "../../hooks/validateRegister";
+import useFormTouched from "../../hooks/useFormTouched";
+import usePasswordStrength from "../../hooks/usePasswordStrength";
 import styles from "./RegisterForm.module.css";
 
 function RegisterForm() {
-  const [username, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [passwordStrength, setPasswordStrength] = useState(0);
+  const { fields, setFields, validateFields } = useFormValidation(
+    {
+      username: "",
+      email: "",
+      password: "",
+      passwordConfirm: "",
+    },
+    validateRegister
+  );
+
+  const { touched, handleBlur } = useFormTouched();
+  const passwordStrength = usePasswordStrength(fields.password);
+
   const [errorMessage, setErrorMessage] = useState("");
   const dispatch = useDispatch();
 
@@ -34,160 +45,171 @@ function RegisterForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validate if passwords match
-    if (password !== passwordConfirm) {
-      setErrorMessage("Passwords do not match.");
-      return;
-    }
+    if (!validateFields()) return;
 
-    dispatch(register({ username, email, password }))
+    const { passwordConfirm, ...fieldsWithoutPasswordConfirm } = fields;
+
+    dispatch(register(fieldsWithoutPasswordConfirm))
       .unwrap()
       .then(() => {
-        // Clear inputs only if registration is successful
-        setName("");
-        setEmail("");
-        setPassword("");
-        setPasswordConfirm("");
-
-        setErrorMessage("");
+        setFields({
+          username: "",
+          email: "",
+          password: "",
+          passwordConfirm: "",
+        });
+        toast.success("Registration successful!");
       })
       .catch((err) => {
-        // Do not clear the inputs if there's an error
-        setErrorMessage(err || "An unknown error occurred.");
+        console.error(err);
+        setErrorMessage("Account with this email already exists.");
+        toast.error("Account with this email already exists.");
       });
-  };
-
-  const calculatePasswordStrength = (password) => {
-    let strength = 0;
-
-    if (password.length > 7) strength += 1;
-    if (password.length > 10) strength += 1;
-    if (/[A-Z]/.test(password)) strength += 1;
-    if (/[0-9]/.test(password)) strength += 1;
-    if (/[^A-Za-z0-9]/.test(password)) strength += 1;
-
-    return strength;
-  };
-
-  const handlePasswordChange = (e) => {
-    const newPassword = e.target.value;
-    setPassword(newPassword);
-    setPasswordStrength(calculatePasswordStrength(newPassword));
   };
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
+      <ToastContainer />
       <div className={styles.inputs}>
-        <div className={styles.inputWrapper}>
-          <FontAwesomeIcon icon={faUser} className={styles.inputIcon} />
+        <div className={styles.inputContainer}>
+          <div className={styles.inputWrapper}>
+            <FontAwesomeIcon icon={faUser} className={styles.inputIcon} />
 
-          <Input
-            autoComplete="on"
-            paddingLeft="53.5px"
-            width="100%"
-            type="text"
-            value={username}
-            handleChange={(e) => {
-              setName(e.target.value);
-            }}
-            placeholder="Name"
-            required={true}
-          />
+            <Input
+              autoComplete="on"
+              paddingLeft="53.5px"
+              width="100%"
+              type={"text"}
+              value={fields.username}
+              handleChange={(e) => {
+                setFields({ ...fields, username: e.target.value });
+              }}
+              handleBlur={handleBlur("username")}
+              placeholder="Name"
+              required={true}
+            />
+          </div>
+          {touched.username && !fields.username && (
+            <p className={styles.inputError}>Required</p>
+          )}
         </div>
+        <div className={styles.inputContainer}>
+          <div className={styles.inputWrapper}>
+            <FontAwesomeIcon icon={faEnvelope} className={styles.inputIcon} />
 
-        <div className={styles.inputWrapper}>
-          <FontAwesomeIcon icon={faEnvelope} className={styles.inputIcon} />
-
-          <Input
-            autoComplete="on"
-            paddingLeft="53.5px"
-            width="100%"
-            type="email"
-            value={email}
-            handleChange={(e) => {
-              setEmail(e.target.value);
-            }}
-            placeholder="E-mail"
-            required={true}
-          />
+            <Input
+              autoComplete="on"
+              paddingLeft="53.5px"
+              width="100%"
+              type="email"
+              value={fields.email}
+              handleChange={(e) => {
+                setFields({ ...fields, email: e.target.value });
+              }}
+              handleBlur={handleBlur("email")}
+              placeholder="E-mail"
+              required={true}
+            />
+          </div>
+          {touched.email && !fields.email && (
+            <p className={styles.inputError}>Required</p>
+          )}
         </div>
+        <div className={styles.inputContainer}>
+          <div className={styles.inputWrapper}>
+            <FontAwesomeIcon icon={faLock} className={styles.inputIcon} />
 
-        <div className={styles.inputWrapper}>
-          <FontAwesomeIcon icon={faLock} className={styles.inputIcon} />
+            {eyeVisible && (
+              <VscEye
+                onClick={() => {
+                  toggleEyeVisible();
+                  toggleClosedEyeVisible();
+                  setType("text");
+                }}
+                size="24px"
+                className={styles.eyeIcon}
+              />
+            )}
 
-          {eyeVisible && (
-            <VscEye
-              onClick={() => {
-                toggleEyeVisible();
-                toggleClosedEyeVisible();
-                setType("text");
+            {closedEyeVisible && (
+              <VscEyeClosed
+                onClick={() => {
+                  toggleEyeVisible();
+                  toggleClosedEyeVisible();
+                  setType("password");
+                }}
+                size="24px"
+                className={styles.eyeIcon}
+              />
+            )}
+
+            <Input
+              autoComplete="on"
+              paddingLeft="53.5px"
+              width="100%"
+              type={type}
+              value={fields.password}
+              handleChange={(e) => {
+                setFields({ ...fields, password: e.target.value });
               }}
-              size="24px"
-              className={styles.eyeIcon}
+              handleBlur={handleBlur("password")}
+              placeholder="Password"
+              required={true}
             />
+          </div>
+          {touched.password && !fields.password && (
+            <p className={styles.inputError}>Required</p>
           )}
-
-          {closedEyeVisible && (
-            <VscEyeClosed
-              onClick={() => {
-                toggleEyeVisible();
-                toggleClosedEyeVisible();
-                setType("password");
-              }}
-              size="24px"
-              className={styles.eyeIcon}
-            />
-          )}
-
-          <Input
-            autoComplete="on"
-            paddingLeft="53.5px"
-            width="100%"
-            type={type}
-            value={password}
-            handleChange={handlePasswordChange}
-            placeholder="Password"
-            required={true}
-          />
         </div>
+        <div className={styles.inputContainer}>
+          <div className={styles.inputWrapper}>
+            <FontAwesomeIcon icon={faLock} className={styles.inputIcon} />
 
-        <div className={styles.inputWrapper}>
-          <FontAwesomeIcon icon={faLock} className={styles.inputIcon} />
+            {confirmEyeVisible && (
+              <VscEye
+                onClick={() => {
+                  toggleConfirmEyeVisible();
+                  toggleConfirmClosedEyeVisible();
+                  setConfirmType("text");
+                }}
+                size="24px"
+                className={styles.eyeIcon}
+              />
+            )}
 
-          {confirmEyeVisible && (
-            <VscEye
-              onClick={() => {
-                toggleConfirmEyeVisible();
-                toggleConfirmClosedEyeVisible();
-                setConfirmType("text");
-              }}
-              size="24px"
-              className={styles.eyeIcon}
+            {confirmClosedEyeVisible && (
+              <VscEyeClosed
+                onClick={() => {
+                  toggleConfirmEyeVisible();
+                  toggleConfirmClosedEyeVisible();
+                  setConfirmType("password");
+                }}
+                size="24px"
+                className={styles.eyeIcon}
+              />
+            )}
+
+            <Input
+              autoComplete="on"
+              paddingLeft="53.5px"
+              width="100%"
+              type={confirmType}
+              value={fields.passwordConfirm}
+              handleChange={(e) =>
+                setFields({ ...fields, passwordConfirm: e.target.value })
+              }
+              handleBlur={handleBlur("passwordConfirm")}
+              placeholder="Confirm Password"
+              required={true}
             />
+          </div>
+          {touched.passwordConfirm && !fields.passwordConfirm && (
+            <p className={styles.inputError}>Required</p>
           )}
-
-          {confirmClosedEyeVisible && (
-            <VscEyeClosed
-              onClick={() => {
-                toggleConfirmEyeVisible();
-                toggleConfirmClosedEyeVisible();
-                setConfirmType("password");
-              }}
-              size="24px"
-              className={styles.eyeIcon}
-            />
-          )}
-
-          <Input
-            autoComplete="on"
-            paddingLeft="53.5px"
-            width="100%"
-            type={confirmType}
-            value={passwordConfirm}
-            handleChange={(e) => setPasswordConfirm(e.target.value)}
-            placeholder="Confirm Password"
-            required={true}
-          />
+          {touched.passwordConfirm &&
+            fields.password !== fields.passwordConfirm && (
+              <p className={styles.inputError}>Passwords must match</p>
+            )}
         </div>
         <div className={styles.passwordStrengthBar}>
           <div

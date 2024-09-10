@@ -5,7 +5,6 @@ import clsx from "clsx";
 import styles from "./Input.module.css";
 
 export default function Input({
-  inputContainer,
   type,
   placeholder,
   required,
@@ -17,23 +16,25 @@ export default function Input({
   value,
   paddingLeft,
   autoComplete,
+  handleBlur,
 }) {
   return (
-    <div style={{ width: `${width}` }} className={styles.inputContainer}>
+    <div style={{ width: width || "auto" }} className={styles.inputContainer}>
       <input
-        autoComplete={autoComplete}
-        style={{ paddingLeft: `${paddingLeft}` }}
+        autoComplete={autoComplete || "off"}
+        style={{ paddingLeft: paddingLeft || "0px" }}
         onChange={handleChange}
-        name={name}
+        name={name || ""}
         className={clsx(
           styles.input,
           className,
           variant === "center" ? styles.inputCenter : styles.input
         )}
-        type={type}
-        placeholder={placeholder}
-        required={required}
-        value={value}
+        type={type || "text"}
+        placeholder={placeholder || ""}
+        required={required || false}
+        value={value || ""}
+        onBlur={handleBlur}
       />
     </div>
   );

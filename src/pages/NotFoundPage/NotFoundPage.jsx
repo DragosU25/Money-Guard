@@ -6,6 +6,7 @@ import notFound from "../../assets/images/icons/browser-error-404-icon.svg";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import style from "./NotFoundPage.module.css";
+import Button from "../../components/commonComponents/Button";
 
 export default function NotFoundPage({ initPage }) {
   const navigate = useNavigate();
@@ -22,10 +23,14 @@ export default function NotFoundPage({ initPage }) {
   return (
     <div className={style.notFoundContainer}>
       <img className={style.notFoundImg} src={notFound} alt="Not Found" />
-      <p className={style.notFoundText}>Ruta nu exista</p>
-      <button className={style.button} onClick={handleRedirect}>
-        &lt;&lt; Inapoi la pagina principala !
-      </button>
+      <p className={style.notFoundText}>The route does not exist !</p>
+
+      <Button
+        className={style.button}
+        handleClick={handleRedirect}
+        variant="colored">
+        &lt;&lt;&lt; Go back to main page
+      </Button>
     </div>
   );
 }
