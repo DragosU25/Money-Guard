@@ -6,6 +6,10 @@ import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import SharedLayout from "./components/layouts/SharedLayout/SharedLayout";
 import { refreshUser } from "./redux/auth/operationsAuth";
 import { getCurrencyRate } from "./redux/currency/operationsCurrencySlice";
+// import {
+//   getTransactionItems,
+//   getTransactions,
+// } from "./redux/statistics/operationsStatistics";
 
 import NotFoundPage from "./pages/NotFoundPage";
 
@@ -31,12 +35,20 @@ const LazyRegistrationPage = lazy(() =>
   import("./pages/RegistrationPage/RegistrationPage")
 );
 
+// const year = new Date().getFullYear();
+// console.log(year);
+
+// const month = new Date().getMonth() + 1;
+// console.log(month);
+
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(refreshUser());
     dispatch(getCurrencyRate());
+    // dispatch(getTransactions({ month: month, year: year }));
+    // dispatch(getTransactionItems());
   }, [dispatch]);
 
   return (

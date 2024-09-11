@@ -15,11 +15,13 @@ axios.defaults.baseURL = "https://wallet.b.goit.study/";
 axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 
 export const getTransactions = createAsyncThunk(
-  "statistics/getAllTransactions",
-  async (_, thunkAPI) => {
+  "statistics/getTransactions",
+  async ({ month, year }, thunkAPI) => {
     try {
-      const response = await axios.get("/api/transactions");
-      // console.log(response.data);
+      const response = await axios.get(
+        `/api/transactions-summary?month=${month}&year=${year}`
+      );
+      console.log(response.data);
 
       toast.success("Transaction added successfully !");
 
@@ -27,6 +29,22 @@ export const getTransactions = createAsyncThunk(
     } catch (error) {
       toast(errorNotify);
 
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || error.message
+      );
+    }
+  }
+);
+
+export const getTransactionItems = createAsyncThunk(
+  "statistics/getTransactionsItems",
+  async (_, thunkAPI) => {
+    try {
+      const response = await axios.get(`/api/transaction-categories`);
+      console.log(response.data);
+
+      return response.data;
+    } catch (error) {
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || error.message
       );

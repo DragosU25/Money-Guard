@@ -127,7 +127,7 @@
   }
 
   .currencyContainer {
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     display: flex;
     width: calc((100% - 32px) / 2);

@@ -1,13 +1,21 @@
 import React from "react";
 
 import styles from "./StatisticsTab.module.css";
-// import Chart from "../../components/Chart/Chart";
+import StatisticsDashboard from "../../components/StatisticsDashboard/StatisticsDashboard";
+import Chart from "../../components/Chart/Chart";
+import StatisticsTable from "../../components/StatisticsTable/StatisticsTable";
 
 export default function StatisticsTab() {
   return (
     <div className={styles.statisticsContainer}>
-      <h1 className={styles.statisticsTitle}>Statistics</h1>
-      {/* <Chart /> */}
+      <div className={styles.statisticsTitleAndChartContainer}>
+        <h1 className={styles.statisticsTitle}>Statistics</h1>
+        <Chart />
+      </div>
+      <div className={styles.statisticsDashboardAndTableContainer}>
+        <StatisticsDashboard />
+        <StatisticsTable />
+      </div>
     </div>
   );
 }
