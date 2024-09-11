@@ -11,6 +11,7 @@ import Loader from "../../components/commonComponents/Loader/Loader";
 
 import useToggle from "../../hooks/useToggle";
 import Modal from "../../components/commonComponents/Modal/Modal";
+import Footer from "../../components/Footer";
 
 import { useDispatch } from "react-redux";
 import { logOut } from "../../redux/auth/operationsAuth";
@@ -33,7 +34,7 @@ function DashboardPage() {
   }
 
   return (
-    <>
+    <div className={styles.allContainer}>
       <Modal
         closeButton={styles.closeButton}
         handleModalClose={toggleIsLogoutModalVisible}
@@ -41,7 +42,7 @@ function DashboardPage() {
         <header className={styles.modalHeader}>
           <LogoContainer className={styles.logoHeaderContainer} />
           <div className={styles.userContainer}>
-            <p> {user.username}</p>
+            <p> {user ? user.username : ""}</p>
             <span>|</span>
             <LogoutButton handleLogoutModal={toggleIsLogoutModalVisible} />
           </div>
@@ -74,7 +75,8 @@ function DashboardPage() {
           </Suspense>
         </div>
       </main>
-    </>
+      <Footer />
+    </div>
   );
 }
 

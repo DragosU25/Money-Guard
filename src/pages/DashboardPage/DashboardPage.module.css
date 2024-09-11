@@ -1,16 +1,27 @@
 @import "../../styles/variables.css";
 
+.allContainer {
+  display: flex;
+  flex-flow: column;
+  /* height: 100%; */
+  width: 100%;
+  height: -webkit-fill-available;
+}
+
 .dashboardContainer {
+  display: flex;
+  flex-flow: column;
   background: var(--gradient-background);
   flex-grow: 1;
   overflow: auto;
   color: white;
-  height: calc(100vh - 142px);
+  height: 100%;
 }
 
 .main {
   display: flex;
   flex-direction: column;
+  height: 100%;
   width: 100%;
 
   /* background: rgba(47, 21, 176, 0.73); */

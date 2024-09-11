@@ -8,6 +8,7 @@ import { refreshUser } from "./redux/auth/operationsAuth";
 import { getCurrencyRate } from "./redux/currency/operationsCurrencySlice";
 
 import NotFoundPage from "./pages/NotFoundPage";
+
 import Loader from "./components/commonComponents/Loader/Loader";
 
 import "./App.css";

@@ -1,40 +1,22 @@
-import React from "react";
-import PropTypes from "prop-types";
+import { Link } from 'react-router-dom';
+import styles from './NotFoundPage.module.css';
 
-import notFound from "../../assets/images/icons/browser-error-404-icon.svg";
-
-import { useLocation, useNavigate } from "react-router-dom";
-
-import style from "./NotFoundPage.module.css";
-import Button from "../../components/commonComponents/Button";
-
-export default function NotFoundPage({ initPage }) {
-  const navigate = useNavigate();
-  const location = useLocation();
-  console.log(location.state);
-
-  const backLink = location.state?.from ?? `/${initPage}`;
-  console.log(backLink);
-
-  function handleRedirect() {
-    navigate(`${backLink}`, { replace: true });
-  }
-
+const NotFoundPage = () => {
   return (
-    <div className={style.notFoundContainer}>
-      <img className={style.notFoundImg} src={notFound} alt="Not Found" />
-      <p className={style.notFoundText}>The route does not exist !</p>
-
-      <Button
-        className={style.button}
-        handleClick={handleRedirect}
-        variant="colored">
-        &lt;&lt;&lt; Go back to main page
-      </Button>
-    </div>
+    <section className={styles.notfoundSection}>
+      <div className={styles.notfound}>
+        <div className={styles['notfound-404']}>
+          <h1>Oops!</h1>
+        </div>
+        <h2>404 - Page not found</h2>
+        <p>
+          The page you are looking for might have been removed, had its name
+          changed or is temporarily unavailable.
+        </p>
+        <Link to={'/'}>Go To Homepage</Link>
+      </div>
+    </section>
   );
-}
-
-NotFoundPage.propTypes = {
-  initPage: PropTypes.string,
 };
+
+export default NotFoundPage;

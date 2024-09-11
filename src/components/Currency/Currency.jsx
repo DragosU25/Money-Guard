@@ -10,10 +10,14 @@ export default function Currency() {
   // console.log(rate.rates.EUR);
   // console.log(rate?.rates?.RON);
 
-  const usdSell = `${Number(rate?.rates?.RON).toFixed(2)}`;
+  const usdSell = rate
+    ? `${Number(rate?.rates?.RON).toFixed(2)}`
+    : `${Number(4.51)}`;
   const usdBuy = `${Number(usdSell * 1.1).toFixed(2)}`;
 
-  const eurSell = `${Number(rate?.rates?.RON * 1.01).toFixed(2)}`;
+  const eurSell = rate
+    ? `${Number(rate?.rates?.RON * 1.01).toFixed(2)}`
+    : `${Number(4, 51 * 1.01).toFixed(2)}`;
   const eurBuy = `${Number(eurSell * 1.1).toFixed(2)}`;
 
   return (

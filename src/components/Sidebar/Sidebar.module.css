@@ -42,7 +42,7 @@
   gap: 20px;
   height: 44px;
   justify-content: center;
-  width: fit-content;
+  width: 44px;
   filter: drop-shadow(0px 3px 10px rgba(74, 86, 226, 0.5));
 }
 
@@ -50,6 +50,9 @@
   height: 36px;
   width: 36px;
   border-radius: 8px;
+  fill: #3c2371;
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 4px;
 }
 
 .span {
@@ -101,11 +104,13 @@
 
   .link {
     height: 24px;
+    width: fit-content;
   }
 
   .link svg {
     height: 18px;
     width: 18px;
+    padding: 3px;
   }
 
   .currencyLink {

@@ -12,7 +12,7 @@ const handlePending = (state) => {
 
 const handleRejected = (state, action) => {
   state.error = action.payload;
-  state.rate = { rates: Number(4.51).toFixed(2) };
+  // state.rate = { rates: Number(4.51).toFixed(2) };
 };
 
 const rateSlice = createSlice({
