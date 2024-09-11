@@ -4,11 +4,12 @@
   height: 60px;
   background: linear-gradient(270deg, #2e1746 3.2%, #2e225f 99.98%);
   display: flex;
-  height: 100%;
+  height: fit-content;
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
   padding: 12px 20px 11.51px 20px;
+  width: -webkit-fill-available;
 }
 
 .logoContainer {
