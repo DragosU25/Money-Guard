@@ -20,7 +20,9 @@ code {
 
 #root {
   display: flex;
+  flex-direction: column;
   height: 100%;
+  width: 100%;
 }
 
 @media screen and (width >= 1024px) {
