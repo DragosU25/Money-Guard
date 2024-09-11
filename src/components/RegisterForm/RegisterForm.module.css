@@ -28,7 +28,7 @@
   align-items: center;
   gap: 40px;
   justify-content: center;
-  width: 100%;
+  /* width: 100%; */
 }
 .inputWrapper {
   position: relative;

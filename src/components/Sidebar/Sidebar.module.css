@@ -42,13 +42,17 @@
   gap: 20px;
   height: 44px;
   justify-content: center;
-  width: fit-content;
+  width: 44px;
   filter: drop-shadow(0px 3px 10px rgba(74, 86, 226, 0.5));
 }
 
 .link svg {
   height: 36px;
   width: 36px;
+  border-radius: 8px;
+  fill: #3c2371;
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 4px;
 }
 
 .span {
@@ -83,13 +87,13 @@
   .sidebarLeftContainer {
     display: flex;
     flex-direction: column;
-    /* height: 100%; */
+    height: 100%;
     width: calc((100% - 32px) / 2);
   }
 
   .linksContainer {
     margin-top: 40px;
-    margin-bottom: 29px;
+    margin-bottom: 28px;
   }
 
   .nav {
@@ -100,11 +104,13 @@
 
   .link {
     height: 24px;
+    width: fit-content;
   }
 
   .link svg {
     height: 18px;
     width: 18px;
+    padding: 3px;
   }
 
   .currencyLink {
@@ -121,9 +127,11 @@
   }
 
   .currencyContainer {
-    display: inherit;
+    justify-content: center;
+    align-items: center;
+    display: flex;
     width: calc((100% - 32px) / 2);
-    height: fit-content;
+    height: 100%;
   }
 }
 
@@ -131,13 +139,14 @@
   .sidebarContainer {
     border-right: 1px solid white;
     flex-direction: column;
-    height: calc(100vh - 80px);
+    height: -webkit-fill-available;
     padding: 0;
-    width: 27.27%;
+    width: fit-content;
   }
 
   .sidebarLeftContainer {
     width: 100%;
+    height: fit-content;
   }
 
   .linksContainer {
@@ -149,5 +158,6 @@
   .currencyContainer {
     width: 100%;
     flex-grow: 1;
+    height: fit-content;
   }
 }

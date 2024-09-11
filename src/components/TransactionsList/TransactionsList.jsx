@@ -2,6 +2,7 @@ import React from "react";
 import TransactionItem from "../TransactionsItem/TransactionsItem";
 import styles from "./TransactionsList.module.css";
 
+
 const TransactionsList = ({ transactions, onEdit, onDelete }) => {
   return (
     <div className={styles.container}>
@@ -21,3 +22,10 @@ const TransactionsList = ({ transactions, onEdit, onDelete }) => {
 };
 
 export default TransactionsList;
+=======
+import styles from "./TransactionsList.module.css";
+
+export default function TransactionsList() {
+  return <div className={styles.mainCont}>TransactionsList</div>;
+}
+

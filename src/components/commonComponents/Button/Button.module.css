@@ -28,6 +28,7 @@
   scale: 0.99;
   box-shadow: rgba(0, 0, 0, 0.5) 3px 5px 8px 3px;
   background: linear-gradient(90deg, #e86805, #9e001c 70%);
+  color: white;
 }
 
 .coloredButton {

@@ -5,6 +5,8 @@ import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import SharedLayout from "./components/layouts/SharedLayout/SharedLayout";
 import { refreshUser } from "./redux/auth/operationsAuth";
+import { getCurrencyRate } from "./redux/currency/operationsCurrencySlice";
+
 import NotFoundPage from "./pages/NotFoundPage";
 
 import Loader from "./components/commonComponents/Loader/Loader";
@@ -34,6 +36,7 @@ function App() {
 
   useEffect(() => {
     dispatch(refreshUser());
+    dispatch(getCurrencyRate());
   }, [dispatch]);
 
   return (
