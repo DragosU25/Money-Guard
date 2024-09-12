@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 
 import styles from "./StatisticsItem.module.css";
 
-const getTrasactionColor = (category) => {
-  switch (category) {
+const getTrasactionColor = (color) => {
+  switch (color) {
     case "Main expenses":
       return "rgba(254, 208, 87, 1)";
 

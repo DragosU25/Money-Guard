@@ -21,7 +21,7 @@ export const getTransactions = createAsyncThunk(
       const response = await axios.get(
         `/api/transactions-summary?month=${month}&year=${year}`
       );
-      console.log(response.data);
+      // console.log(response.data);
 
       toast.success("Transaction added successfully !");
 
@@ -41,7 +41,7 @@ export const getTransactionItems = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await axios.get(`/api/transaction-categories`);
-      console.log(response.data);
+      // console.log(response.data);
 
       return response.data;
     } catch (error) {

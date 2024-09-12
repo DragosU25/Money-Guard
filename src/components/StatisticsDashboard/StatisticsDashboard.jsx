@@ -71,13 +71,12 @@ export default function StatisticsDashboard() {
     setYear(ev.currentTarget.value);
   }
 
-  console.log(month);
-  console.log(year);
+  //   console.log(month);
+  //   console.log(year);
 
   return (
     <div className={styles.dasboardContainer}>
       <select
-        menuPlacement="auto"
         ref={monthRef}
         className={styles.dasboardInput}
         onChange={handleSelectMonth}

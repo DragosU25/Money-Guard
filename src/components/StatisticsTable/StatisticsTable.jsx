@@ -6,8 +6,8 @@ import StatisticsItem from "./StatisticsItem/StatisticsItem";
 
 export default function StatisticsTable() {
   const { statisticsTransactions } = useStatistics();
-  console.log(statisticsTransactions?.expenseSummary);
-  console.log(statisticsTransactions?.incomeSummary);
+  //   console.log(statisticsTransactions?.expenseSummary);
+  //   console.log(statisticsTransactions?.incomeSummary);
 
   const expense = statisticsTransactions?.expenseSummary;
   const income = statisticsTransactions?.incomeSummary;
@@ -37,7 +37,11 @@ export default function StatisticsTable() {
         {transactionsLength > 0 &&
           expensesItems.map((expense) => {
             return (
-              <StatisticsItem variant={expense.name} sum={expense.total} />
+              <StatisticsItem
+                key={expense.name}
+                variant={expense.name}
+                sum={Math.abs(expense.total).toFixed(2)}
+              />
             );
           })}
       </div>
