@@ -1,9 +1,14 @@
+body {
+  height: 100%;
+}
+
 .statisticsContainer {
   align-items: center;
   display: flex;
   flex-direction: column;
   height: 100%;
   margin-top: 28px;
+  overflow: hidden;
   padding: 0 20px;
 }
 
@@ -31,9 +36,14 @@
   flex-direction: column;
   gap: 20px;
   justify-content: center;
+  /* padding: 0 20px; */
 }
 
 @media screen and (width >= 768px) {
+  body {
+    height: 100vh;
+  }
+
   .statisticsContainer {
     flex-direction: row;
     gap: 32px;
@@ -43,6 +53,7 @@
 
   .statisticsTitleAndChartContainer {
     width: calc((100% - 32px) / 2);
+    height: -webkit-fill-available;
   }
 
   .statisticsDashboardAndTableContainer {
@@ -73,5 +84,6 @@
   }
   .statisticsDashboardAndTableContainer {
     flex-grow: 1;
+    /* width: -webkit-fill-available; */
   }
 }
