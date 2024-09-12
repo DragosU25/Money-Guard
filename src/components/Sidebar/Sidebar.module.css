@@ -156,6 +156,7 @@
   }
 
   .currencyContainer {
+    align-items: inherit;
     width: 100%;
     flex-grow: 1;
     height: fit-content;

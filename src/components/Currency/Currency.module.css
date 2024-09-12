@@ -198,6 +198,7 @@
 @media screen and (width >= 1024px) {
   .mainContainer {
     width: -webkit-fill-available;
+    height: auto;
   }
 
   .currenciesContainer {
