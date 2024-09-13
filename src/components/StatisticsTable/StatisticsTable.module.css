@@ -1,3 +1,22 @@
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  /* background: #ffc727; */
+  background: rgb(216, 156, 78);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #9e40ba;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7000ff;
+}
+
 .tableContainer {
   align-items: center;
   display: flex;
@@ -62,7 +81,7 @@
   flex-direction: column;
   gap: 16px;
   padding: 16px;
-  padding-bottom: 45px;
+  padding-bottom: 10px;
 
   color: var(--white, #fbfbfb);
   font-family: Poppins;
@@ -94,15 +113,25 @@
 
 @media screen and (width >= 768px) {
   .tableContainer {
-    overflow: auto;
+    height: -webkit-fill-available;
   }
 
   .tableItemsContainer {
-    max-height: calc(-538px + 100vh);
+    max-height: calc(-650px + 100vh);
     overflow: auto;
   }
 
   .tableItemsNoTransactionsContainer {
     max-width: inherit;
+  }
+}
+
+@media screen and (width >= 1024px) {
+  .tableItemsContainer {
+    max-height: calc(-500px + 100vh);
+  }
+
+  .tableTotalsContainer {
+    padding: 16px;
   }
 }

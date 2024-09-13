@@ -142,6 +142,7 @@
     height: -webkit-fill-available;
     padding: 0;
     width: fit-content;
+    width: calc((100vw * 37.5) / 100);
   }
 
   .sidebarLeftContainer {

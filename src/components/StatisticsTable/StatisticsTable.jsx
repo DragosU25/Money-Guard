@@ -20,7 +20,17 @@ export default function StatisticsTable() {
     return transaction.type !== "INCOME";
   });
 
-  //   console.log(expensesItems);
+  const sortedExpensesItems = expensesItems?.sort((a, b) => {
+    let ap = Number(a.total);
+    // console.log(ap);
+
+    let bp = Number(b.total);
+    // console.log(b);
+
+    return ap - bp;
+  });
+
+  //   console.log(sortedExpensesItems);
 
   return (
     <div className={styles.tableContainer}>
@@ -35,7 +45,7 @@ export default function StatisticsTable() {
           </p>
         )}
         {transactionsLength > 0 &&
-          expensesItems.map((expense) => {
+          sortedExpensesItems.map((expense) => {
             return (
               <StatisticsItem
                 key={expense.name}

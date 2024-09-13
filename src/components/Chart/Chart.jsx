@@ -68,82 +68,70 @@ export default function Chart() {
     main > 0 && {
       name: "Main expenses",
       value: main,
-      backgroundColor:
-        main > 0 ? "rgba(254, 208, 87, 1)" : "rgba(255, 255, 255, 0.6)",
+      backgroundColor: "rgba(254, 208, 87, 1)",
       borderWidth: 0,
       hoverOffset: 5,
     },
     products > 0 && {
       name: "Products",
       value: products,
-      backgroundColor:
-        products > 0 ? "rgba(255, 0, 255, 1)" : "rgba(255, 255, 255, 0.6)",
+      backgroundColor: "rgba(255, 0, 255, 1)",
       borderWidth: 0,
       hoverOffset: 5,
     },
     car > 0 && {
       name: "Car",
       value: car,
-      backgroundColor:
-        car > 0 ? "rgba(253, 148, 152, 1)" : "rgba(255, 255, 255, 0.6)",
+      backgroundColor: "rgba(253, 148, 152, 1)",
       borderWidth: 0,
       hoverOffset: 5,
     },
     selfCare > 0 && {
       name: "Self care",
       value: selfCare,
-      backgroundColor:
-        selfCare > 0 ? "rgba(197, 186, 255, 1)" : "rgba(255, 255, 255, 0.6)",
+      backgroundColor: "rgba(197, 186, 255, 1)",
       borderWidth: 0,
       hoverOffset: 5,
     },
     childCare > 0 && {
       name: "Child care",
       value: childCare,
-      backgroundColor:
-        childCare > 0 ? "rgba(127, 255, 0, 1)" : "rgba(255, 255, 255, 0.6)",
+      backgroundColor: "rgba(127, 255, 0, 1)",
       borderWidth: 0,
       hoverOffset: 5,
     },
     householdProducts > 0 && {
       name: "Household products",
       value: householdProducts,
-      backgroundColor:
-        householdProducts > 0
-          ? "rgba(74, 86, 226, 1)"
-          : "rgba(255, 255, 255, 0.6)",
+      backgroundColor: "rgba(74, 86, 226, 1)",
       borderWidth: 0,
       hoverOffset: 5,
     },
     education > 0 && {
       name: "Education",
       value: education,
-      backgroundColor:
-        education > 0 ? "rgba(0, 255, 255, 1)" : "rgba(255, 255, 255, 0.6)",
+      backgroundColor: "rgba(0, 255, 255, 1)",
       borderWidth: 0,
       hoverOffset: 5,
     },
     leisure > 0 && {
       name: "Leisure",
       value: leisure,
-      backgroundColor:
-        leisure > 0 ? "rgba(255, 119, 0, 1)" : "rgba(255, 255, 255, 0.6)",
+      backgroundColor: "rgba(255, 119, 0, 1)",
       borderWidth: 0,
       hoverOffset: 5,
     },
     otherExpenses > 0 && {
       name: "Other expenses",
       value: otherExpenses,
-      backgroundColor:
-        otherExpenses > 0 ? "rgba(0, 173, 132, 1)" : "rgba(255, 255, 255, 0.6)",
+      backgroundColor: "rgba(0, 173, 132, 1)",
       borderWidth: 0,
       hoverOffset: 5,
     },
     entertainment > 0 && {
       name: "Entertainment",
       value: entertainment,
-      backgroundColor:
-        entertainment > 0 ? "rgba(177, 15, 72, 1)" : "rgba(255, 255, 255, 0.6)",
+      backgroundColor: "rgba(177, 15, 72, 1)",
       borderWidth: 0,
       hoverOffset: 5,
     },
@@ -156,13 +144,29 @@ export default function Chart() {
     },
   ];
 
-  const CustomTooltip = ({ active, payload, label }) => {
+  const sortedData = data.sort((a, b) => {
+    let ap = Number(a.value);
+    // console.log(ap);
+
+    let bp = Number(b.value);
+    // console.log(b);
+
+    return ap - bp;
+  });
+
+  console.log(sortedData);
+
+  const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
+      //   console.log(payload[0].payload.fill);
+
       return (
-        <div className="custom-tooltip">
-          <p className="label">{`${label} : ${payload[0].value}`}</p>
-          {/* <p className="intro">{getIntroOfPage(label)}</p> */}
-          <p className="desc">Anything you want can be displayed here.</p>
+        <div className={styles.tooltipContainer}>
+          <p className={styles.tooltipNameContainer}>{`${payload[0].name}`}</p>
+          <div className={styles.tooltipSumContainer}>
+            <div style={{ background: `${payload[0].payload.fill}` }}></div>
+            <span>{Number(payload[0].value).toFixed(2)}</span>
+          </div>
         </div>
       );
     }
@@ -177,9 +181,11 @@ export default function Chart() {
     <div className={styles.chartContainer}>
       <ResponsiveContainer width="100%" height="100%">
         <PieChart fill="rgba(255, 255, 255, 0.6)">
-          <Tooltip content={CustomTooltip} />
+          <Tooltip cursor={{ cursor: "pointer" }} content={CustomTooltip} />
           <Pie
-            data={data}
+            startOffset={0}
+            className={styles.chart}
+            data={sortedData}
             dataKey="value"
             outerRadius={135}
             innerRadius={95}

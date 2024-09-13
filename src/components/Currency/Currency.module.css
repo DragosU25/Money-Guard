@@ -76,6 +76,20 @@
   /* justify-content: center; */
   margin-top: -37px;
   width: 100%;
+
+  background-color: linear-gradient(
+      0deg,
+      rgba(57, 0, 150, 0.2) 0%,
+      rgba(57, 0, 150, 0.2) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.6) 11.08%,
+      rgba(255, 255, 255, 0.32) 39.7%,
+      rgba(255, 255, 255, 0.16) 57.58%,
+      rgba(255, 255, 255, 0.09) 69.56%,
+      rgba(255, 255, 255, 0) 87.43%
+    );
 }
 
 .graphStrokeSvg {
@@ -89,6 +103,20 @@
 
 .graph {
   width: 100%;
+
+  background-color: linear-gradient(
+      0deg,
+      rgba(57, 0, 150, 0.2) 0%,
+      rgba(57, 0, 150, 0.2) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.6) 11.08%,
+      rgba(255, 255, 255, 0.32) 39.7%,
+      rgba(255, 255, 255, 0.16) 57.58%,
+      rgba(255, 255, 255, 0.09) 69.56%,
+      rgba(255, 255, 255, 0) 87.43%
+    );
 }
 
 .graphSvg {
@@ -162,6 +190,7 @@
     height: 100%;
     justify-content: space-between;
     margin: 0;
+    width: -webkit-fill-available;
   }
 
   .titlesContainer {
@@ -197,7 +226,6 @@
 
 @media screen and (width >= 1024px) {
   .mainContainer {
-    width: -webkit-fill-available;
     height: auto;
   }
 
@@ -209,6 +237,7 @@
 
   .graphContainer {
     margin-top: -35px;
+    /* width: -webkit-fill-available; */
   }
 
   .graphStrokeElipseLeftContainer svg {

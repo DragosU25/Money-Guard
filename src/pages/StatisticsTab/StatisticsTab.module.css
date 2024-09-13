@@ -48,7 +48,7 @@ body {
     flex-direction: row;
     gap: 32px;
     margin: 0;
-    padding: 20px 32px;
+    padding: 20px 32px 0;
   }
 
   .statisticsTitleAndChartContainer {
@@ -60,6 +60,7 @@ body {
     justify-content: flex-start;
     height: -webkit-fill-available;
     width: calc((100% - 32px) / 2);
+    margin-top: 20px;
   }
 }
 
