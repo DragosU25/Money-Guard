@@ -1,3 +1,4 @@
+// TransactionModal.js
 import { useEffect, useRef } from "react";
 import styles from "./TransactionModal.module.css";
 

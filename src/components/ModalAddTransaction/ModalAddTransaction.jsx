@@ -1,6 +1,6 @@
 // import styles from "./ModalAddTransaction.module.css";
 import { AddTransactionForm } from "../TransactionForm/TransactionForm";
-import TransactionModal from "../TransactionModal/TransactionModal";
+import TransactionModal from "../commonComponents/TransactionModal/TransactionModal";
 
 const ModalAddTransaction = ({ closeModal }) => {
   return (

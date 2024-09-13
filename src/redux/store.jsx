@@ -4,6 +4,7 @@ import { authReducer } from "./auth/authSlice";
 import { transactionsReducer } from "./transactions/transactionsSlice";
 
 import { apiReducer } from "./currency/rateSlice";
+import { statisticsReducer } from "./statistics/statisticsSlice";
 
 
 export const store = configureStore({
@@ -13,6 +14,8 @@ export const store = configureStore({
     transactions: transactionsReducer,
 
     rateSlice: apiReducer,
+
+    statisticsSlice: statisticsReducer,
 
   },
 });

@@ -1,5 +1,5 @@
 import React from "react";
-import TransactionModal from "../TransactionModal/TransactionModal";
+import TransactionModal from "../commonComponents/TransactionModal/TransactionModal";
 import styles from "./ModalDeleteTransaction.module.css";
 import { useMediaQuery } from "react-responsive";
 import FormButton from "../commonComponents/FormButton/FormButton";
