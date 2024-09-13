@@ -1,106 +1,83 @@
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { ButtonAddTransactions } from "../ButtonAddTransactions/ButtonAddTransactions";
+import TransactionsList from "../TransactionsList/TransactionsList";
+import TransactionsTable from "../TransactionsTable/TransactionsTable";
+import { useMediaQuery } from "react-responsive";
+import styles from "./TransactionsManager.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchTransactions,
-  addTransaction,
-  updateTransaction,
-  deleteTransaction,
-  fetchTransactionCategories,
-} from "../../redux/transactions/operationsTransactions";
-import EditTransactionForm from "../EditTransactionForm/EditTransactionForm";
-import TransactionList from "../TransactionsList/TransactionsList";
-import { toast } from "react-toastify";
+import { selectTransactions } from "../../redux/transactions/selectorsTransactions";
+import { fetchTransactions } from "../../redux/transactions/operationsTransactions";
+import ModalDeleteTransaction from "../ModalDeleteTransaction copy/ModalDeleteTransaction";
+import ModalEditTransactionNew from "../ModalEditTransaction/ModalEditTransaction";
 import ModalAddTransaction from "../ModalAddTransaction/ModalAddTransaction";
-import styles from "./TransactionsManager.module";
+import Loader from "../commonComponents/Loader/Loader";
 
-const TransactionsManager = () => {
+const HomePage = () => {
   const dispatch = useDispatch();
-  const transactions = useSelector((state) => state.transactions.transactions);
-  const categories = useSelector((state) => state.transactions.categories);
-  const status = useSelector((state) => state.transactions.status);
-  const error = useSelector((state) => state.transactions.error);
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editTransaction, setEditTransaction] = useState(null);
 
   useEffect(() => {
     dispatch(fetchTransactions());
-    dispatch(fetchTransactionCategories())
-      .unwrap()
-      .catch((err) => {
-        toast.error(`Error fetching categories: ${err.message}`);
-      });
   }, [dispatch]);
 
-  const handleAddTransaction = (transaction) => {
-    dispatch(addTransaction(transaction))
-      .unwrap()
-      .then(() => {
-        setIsModalOpen(false);
-        toast.success("Transaction added successfully!");
-      })
-      .catch((err) => {
-        toast.error(`Error adding transaction: ${err.message}`);
-      });
-  };
+  const data = useSelector(selectTransactions);
 
-  const handleUpdateTransaction = (transaction) => {
-    dispatch(updateTransaction(transaction))
-      .unwrap()
-      .then(() => {
-        setEditTransaction(null);
-        toast.success("Transaction updated successfully!");
-      })
-      .catch((err) => {
-        toast.error(`Error updating transaction: ${err.message}`);
-      });
-  };
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  const handleDeleteTransaction = (transactionId) => {
-    dispatch(deleteTransaction(transactionId))
-      .unwrap()
-      .then(() => {
-        toast.success("Transaction deleted successfully!");
-      })
-      .catch((err) => {
-        toast.error(`Error deleting transaction: ${err}`);
-      });
-  };
+  const screenCondition = useMediaQuery({ query: "(min-width: 768px)" });
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  const [forcedLoading, setForcedLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => setForcedLoading(false), 1500);
+  }, [forcedLoading]);
+
+  if (forcedLoading) {
+    return <Loader />;
+  }
+
+  const animation = "animate__animated animate__fadeIn animate__slow";
 
   return (
-    <div className={styles.container}>
-      <h1>Transactions Manager</h1>
-      {status === "loading" && <p>Loading...</p>}
-      {status === "failed" && <p>Error: {error}</p>}
-      <button onClick={() => setIsModalOpen(true)}>Add Transaction</button>
-      {isModalOpen && <ModalAddTransaction closeModal={closeModal} />}
-      {editTransaction && (
-        <EditTransactionForm
-          editTransaction={editTransaction}
-          categories={categories}
-          onUpdate={handleUpdateTransaction}
-          onChange={(e) =>
-            setEditTransaction({
-              ...editTransaction,
-              [e.target.name]: e.target.value,
-            })
-          }
-          setEditTransaction={setEditTransaction}
-        />
-      )}
-      <div className={styles.transactionList}>
-        <TransactionList
-          transactions={transactions}
-          onEdit={(transaction) => setEditTransaction(transaction)}
-          onDelete={handleDeleteTransaction}
-        />
+    <>
+      <div className={`${styles.HomePage} ${animation}`}>
+        {screenCondition ? (
+          <TransactionsTable
+            data={data}
+            openDeleteModal={() => setIsDeleteModalOpen(true)}
+            openEditModal={() => setIsEditModalOpen(true)}
+          />
+        ) : (
+          <TransactionsList
+            data={data}
+            openDeleteModal={() => setIsDeleteModalOpen(true)}
+            openEditModal={() => setIsEditModalOpen(true)}
+          />
+        )}
+
+        <ButtonAddTransactions onClick={() => setIsAddModalOpen(true)} />
       </div>
-    </div>
+
+      <>
+        {isAddModalOpen && (
+          <ModalAddTransaction closeModal={() => setIsAddModalOpen(false)} />
+        )}
+
+        {isDeleteModalOpen && (
+          <ModalDeleteTransaction
+            closeModal={() => setIsDeleteModalOpen(false)}
+          />
+        )}
+
+        {isEditModalOpen && (
+          <ModalEditTransactionNew
+            closeModal={() => setIsEditModalOpen(false)}
+          />
+        )}
+      </>
+    </>
   );
 };
 
-export default TransactionsManager;
+export default HomePage;

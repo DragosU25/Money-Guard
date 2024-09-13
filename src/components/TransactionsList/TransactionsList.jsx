@@ -1,31 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchTransactions } from "../../redux/transactions/operationsTransactions";
+import { selectTransactions } from "../../redux/transactions/selectorsTransactions";
 import TransactionItem from "../TransactionsItem/TransactionsItem";
 import styles from "./TransactionsList.module.css";
 
+const TransactionsList = ({ openEditModal }) => {
+  const dispatch = useDispatch();
+  const transactions = useSelector(selectTransactions);
 
-const TransactionsList = ({ transactions, onEdit, onDelete }) => {
+  useEffect(() => {
+    dispatch(fetchTransactions());
+  }, [dispatch]);
+
   return (
-    <div className={styles.container}>
-      <h2>Transactions List</h2>
-      <ul>
-        {transactions.map((transaction) => (
-          <TransactionItem
-            key={transaction.id}
-            transaction={transaction}
-            onEdit={onEdit}
-            onDelete={onDelete}
-          />
-        ))}
-      </ul>
+    <div className={styles.transactionsList}>
+      {transactions.map((transaction) => (
+        <TransactionItem
+          key={transaction.id}
+          transaction={transaction}
+          openEditModal={openEditModal}
+        />
+      ))}
     </div>
   );
 };
 
 export default TransactionsList;
-=======
-import styles from "./TransactionsList.module.css";
-
-export default function TransactionsList() {
-  return <div className={styles.mainCont}>TransactionsList</div>;
-}
-

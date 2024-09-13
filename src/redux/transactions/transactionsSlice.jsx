@@ -1,19 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-  fetchTransactions,
   addTransaction,
   deleteTransaction,
+  fetchTransactions,
   updateTransaction,
   fetchTransactionCategories,
-} from "../transactions/operationsTransactions";
+} from "./operationsTransactions";
 
 const initialState = {
   categories: [],
-  transactions: [],
+  items: [],
   isLoading: false,
   error: null,
   summary: [],
-  transactionIdForDelete: "",
+  trasactionIdForDelete: "",
   transactionForUpdate: {
     id: "",
     type: "",
@@ -25,7 +25,7 @@ const transactionsSlice = createSlice({
   initialState,
   reducers: {
     setTransactionIdForDelete: (state, action) => {
-      state.transactionIdForDelete = action.payload;
+      state.trasactionIdForDelete = action.payload;
     },
     setTransactionForUpdate: (state, action) => {
       state.transactionForUpdate = action.payload;
@@ -33,6 +33,7 @@ const transactionsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      // * Add transaction
       .addCase(addTransaction.pending, (state) => {
         state.isLoading = true;
       })
@@ -43,8 +44,10 @@ const transactionsSlice = createSlice({
       .addCase(addTransaction.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.transactions.push(action.payload);
+        state.items.push(action.payload);
       })
+
+      // * Delete transaction
       .addCase(deleteTransaction.pending, (state) => {
         state.isLoading = true;
       })
@@ -55,11 +58,12 @@ const transactionsSlice = createSlice({
       .addCase(deleteTransaction.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        const index = state.transactions.findIndex(
-          (el) => el.id === action.payload
+        state.items = state.items.filter(
+          (transaction) => transaction.id !== action.payload.id
         );
-        state.transactions.splice(index, 1);
       })
+
+      // * Update transaction
       .addCase(updateTransaction.pending, (state) => {
         state.isLoading = true;
       })
@@ -70,11 +74,15 @@ const transactionsSlice = createSlice({
       .addCase(updateTransaction.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        const index = state.transactions.findIndex(
-          (el) => el.id === action.payload.id
+        const index = state.items.findIndex(
+          (transaction) => transaction.id === action.payload.id
         );
-        state.transactions.splice(index, 1, action.payload);
+        if (index !== -1) {
+          state.items[index] = action.payload;
+        }
       })
+
+      // * Fetch transactions
       .addCase(fetchTransactions.pending, (state) => {
         state.isLoading = true;
       })
@@ -85,8 +93,10 @@ const transactionsSlice = createSlice({
       .addCase(fetchTransactions.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.transactions = action.payload;
+        state.items = action.payload;
       })
+
+      // * Fetch transaction categories
       .addCase(fetchTransactionCategories.pending, (state) => {
         state.isLoading = true;
       })
@@ -104,5 +114,4 @@ const transactionsSlice = createSlice({
 
 export const { setTransactionIdForDelete, setTransactionForUpdate } =
   transactionsSlice.actions;
-
 export const transactionsReducer = transactionsSlice.reducer;

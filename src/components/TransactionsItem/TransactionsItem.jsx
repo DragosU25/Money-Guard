@@ -1,16 +1,100 @@
-import React from "react";
 import styles from "./TransactionsItem.module.css";
+import icons from "../../assets/images/icons/sprite.svg";
 
-const TransactionItem = ({ transaction, onEdit, onDelete }) => {
+import {
+  formatData,
+  getTransactionCategory,
+} from "../../constants/TransactionConstants";
+import { useDispatch } from "react-redux";
+import {
+  setTransactionForUpdate,
+  setTransactionIdForDelete,
+} from "../../redux/transactions/transactionsSlice";
+
+const TransactionItem = ({ transaction, openDeleteModal, openEditModal }) => {
+  function formatNumberWithSpaces(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  }
+
+  const { type, categoryId, comment, amount, transactionDate } = transaction;
+
+  const dispatch = useDispatch();
+
+  const handleDeleteClick = () => {
+    openDeleteModal();
+    dispatch(setTransactionIdForDelete(transaction.id));
+  };
+
+  const handleEditClick = () => {
+    openEditModal();
+    dispatch(
+      setTransactionForUpdate({ id: transaction.id, type: transaction.type })
+    );
+  };
+
+  let textClass = "";
+  let borderClass = "";
+
+  // Determine class based on data
+  if (type === "INCOME") {
+    textClass = styles.incomeText; // Access class from CSS module
+    borderClass = styles.incomeBorder;
+  } else if (type === "EXPENSE") {
+    textClass = styles.expenseText;
+    borderClass = styles.expenseBorder;
+  }
+
   return (
-    <li className={styles.transactionItem}>
-      <span>{transaction.transactionDate}</span>
-      <span>{transaction.type}</span>
-      <span>{transaction.categoryId}</span>
-      <span>{transaction.comment}</span>
-      <span>{transaction.amount}</span>
-      <button onClick={() => onEdit(transaction)}>Edit</button>
-      <button onClick={() => onDelete(transaction.id)}>Delete</button>
+    <li className={`${styles.TransactionItem} ${borderClass}`}>
+      <div className={`${styles.row} ${styles.firstRow}`}>
+        <span className={styles.fixData}>Date</span>
+        <span className={styles.dynamicData}>
+          {formatData(transactionDate)}
+        </span>
+      </div>
+      <div className={`${styles.row} ${styles.secondRow}`}>
+        <span className={styles.fixData}>Type</span>
+        <span className={styles.dynamicData}>
+          {type === "INCOME" ? "+" : "-"}
+        </span>
+      </div>
+      <div className={`${styles.row} ${styles.thirdRow}`}>
+        <span className={styles.fixData}>Category</span>
+        <span className={styles.dynamicData}>
+          {getTransactionCategory(categoryId)}
+        </span>
+      </div>
+      <div className={`${styles.row} ${styles.forthRow}`}>
+        <span className={styles.fixData}>Comment</span>
+        <span className={styles.dynamicData}>{comment}</span>
+      </div>
+      <div className={`${styles.row} ${styles.fifthRow}`}>
+        <span className={styles.fixData}>Sum</span>
+        <span className={`${styles.dynamicData} ${textClass}`}>
+          {type === "INCOME"
+            ? formatNumberWithSpaces(amount)
+            : formatNumberWithSpaces(amount * -1)}
+        </span>
+      </div>
+      <div className={`${styles.row} ${styles.sixthRow}`}>
+        <button
+          type="button"
+          className={styles.deleteButton}
+          onClick={handleDeleteClick}
+        >
+          Delete
+        </button>
+        <button
+          className={styles.editButton}
+          type="button"
+          onClick={handleEditClick}
+        >
+          <svg className={styles.editIcon}>
+            <use href={`${icons}#icon-edit`}></use>
+          </svg>
+          <span className={styles.editText}>Edit</span>
+        </button>
+      </div>
     </li>
   );
 };

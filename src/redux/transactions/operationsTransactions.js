@@ -1,3 +1,4 @@
+// src/redux/transactions/operationsTransactions.js
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
@@ -21,7 +22,6 @@ export const fetchTransactions = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await axios.get("/api/transactions");
-
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -31,74 +31,74 @@ export const fetchTransactions = createAsyncThunk(
 
 export const addTransaction = createAsyncThunk(
   "transactions/addTransaction",
-
   async (transactionData, thunkAPI) => {
     try {
       const response = await axios.post("/api/transactions", transactionData);
-
-      toast.success("Transaction added successfully !");
+      toast.success("Transaction added successfully!");
       return response.data;
     } catch (error) {
       const errorNotify =
-        error.response.data.message ??
-        `Operation failed and transaction not saved. We are facing some technical problems with our servers ! `;
-
+        error.response?.data?.message ??
+        "Operation failed. Please try again later.";
       toast.error(errorNotify);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
+
 export const deleteTransaction = createAsyncThunk(
   "transactions/deleteTransaction",
+
   async (transactionId, thunkAPI) => {
     try {
-      const response = await axios.delete(`/api/transactions/${transactionId}`);
-      return response.data;
+      await axios.delete(`/api/transactions/${transactionId}`);
+
+      toast.success("Transaction deleted successfully !");
+      return transactionId;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      const errorNotify =
+        error.response.data.message ??
+        `Operation failed and transaction not deleted. We are facing some technical problems with our servers ! `;
+
+      toast.error(errorNotify);
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
 
 export const updateTransaction = createAsyncThunk(
   "transactions/updateTransaction",
-  async (transaction, thunkAPI) => {
+  async ({ transactionId, transactionData }, thunkAPI) => {
     try {
       const response = await axios.patch(
-        `/api/transactions/${transaction.id}`,
-        {
-          ...transaction,
-          amount: Number(transaction.amount),
-        }
+        `/api/transactions/${transactionId}`,
+        transactionData
       );
       return response.data;
     } catch (error) {
-      console.error(
-        "Error updating transaction:",
-        error.response ? error.response.data : error.message
-      );
-      return thunkAPI.rejectWithValue(
-        error.response ? error.response.data : error.message
-      );
+      const errorNotify =
+        error.response?.data?.message ??
+        "Operation failed. Please try again later.";
+      toast.error(errorNotify);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
 export const fetchTransactionsSummary = createAsyncThunk(
   "transactions/fetchTransactionsSummary",
-  async ({ mounth, year }, thunkAPI) => {
+  async ({ month, year }, thunkAPI) => {
     try {
       const response = await axios.get(
-        `/api/transactions-summary?month=${mounth}&year=${year}`
+        `/api/transactions-summary?month=${month}&year=${year}`
       );
-
       return response.data;
     } catch (error) {
       const errorNotify =
-        error.response.data.message ??
-        `Operation failed and transaction not saved. We are facing some technical problems with our servers ! `;
+        error.response?.data?.message ??
+        "Operation failed. Please try again later.";
       toast.error(errorNotify);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
