@@ -136,7 +136,7 @@ export default function Chart() {
       hoverOffset: 5,
     },
     {
-      name: "Default",
+      name: "There are no expenses for this period !",
       value: 0.0000000001,
       backgroundColor: "rgba(255, 255, 255, 0.6)",
       borderWidth: 0,
