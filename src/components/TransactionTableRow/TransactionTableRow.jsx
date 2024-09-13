@@ -1,27 +1,49 @@
-import {
-  formatData,
-  getTransactionCategory,
-} from "../../constants/TransactionConstants";
-import icons from "../../assets/images/icons/sprite.svg";
-import styles from "./TransactionTableRow.module.css";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setTransactionForUpdate,
   setTransactionIdForDelete,
 } from "../../redux/transactions/transactionsSlice";
-
-import { useDispatch } from "react-redux";
+import {
+  selectTransactionCategories,
+  selectTransactionById,
+} from "../../redux/transactions/selectorsTransactions";
+import icons from "../../assets/images/icons/sprite.svg";
+import styles from "./TransactionTableRow.module.css";
 
 const TransactionTableRow = ({
   transaction,
   openDeleteModal,
   openEditModal,
 }) => {
-  function formatNumberWithSpaces(number) {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-  }
+  const dispatch = useDispatch();
+
+  const formatData = (unixData) => {
+    const year = new Date(unixData).getFullYear();
+    const mounth = new Date(unixData).getMonth() + 1;
+    const day = new Date(unixData).getDate();
+
+    const doubleDigitsFormatMounth = String(mounth).padStart(2, 0);
+    const doubleDigitsFormatDay = String(day).padStart(2, 0);
+
+    return `${doubleDigitsFormatDay}.${doubleDigitsFormatMounth}.${year}`;
+  };
+
+  // Obține categoriile din Redux store
+  const categories = useSelector(selectTransactionCategories);
+
+  if (!transaction) return null;
+
   const { type, categoryId, comment, amount, transactionDate } = transaction;
 
-  const dispatch = useDispatch();
+  const formatNumberWithSpaces = (number) => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  };
+
+  // Găsește categoria tranzacției
+  const getTransactionCategory = (categoryId) => {
+    const category = categories.find((cat) => cat.id === categoryId);
+    return category ? category.name : "Unknown";
+  };
 
   const handleDeleteClick = () => {
     openDeleteModal();
@@ -35,14 +57,7 @@ const TransactionTableRow = ({
     );
   };
 
-  let textClass = "";
-
-  // Determine class based on data
-  if (type === "INCOME") {
-    textClass = styles.incomeText; // Access class from CSS module
-  } else if (type === "EXPENSE") {
-    textClass = styles.expenseText;
-  }
+  let textClass = type === "INCOME" ? styles.incomeText : styles.expenseText;
 
   return (
     <tr className={styles.dataRow}>
@@ -61,7 +76,6 @@ const TransactionTableRow = ({
           ? formatNumberWithSpaces(amount)
           : formatNumberWithSpaces(amount * -1)}
       </td>
-
       <td className={styles.TransactionEditColumn}>
         <button
           className={styles.editButton}
@@ -73,7 +87,6 @@ const TransactionTableRow = ({
           </svg>
         </button>
       </td>
-
       <td className={styles.TransactionDeleteColumn}>
         <button
           className={styles.deleteButton}

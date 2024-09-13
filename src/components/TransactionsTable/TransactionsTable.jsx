@@ -20,7 +20,7 @@ const TransactionsTable = ({ data, openDeleteModal, openEditModal }) => {
           {data.map((item) => (
             <TransactionTableRow
               key={item.id}
-              transaction={item}
+              transaction={item} // Transmite obiectul tranzacției
               openDeleteModal={openDeleteModal}
               openEditModal={openEditModal}
             />

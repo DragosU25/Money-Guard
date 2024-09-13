@@ -1,24 +1,35 @@
 import styles from "./TransactionsItem.module.css";
 import icons from "../../assets/images/icons/sprite.svg";
-
-import {
-  formatData,
-  getTransactionCategory,
-} from "../../constants/TransactionConstants";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setTransactionForUpdate,
   setTransactionIdForDelete,
 } from "../../redux/transactions/transactionsSlice";
+import { selectTransactionCategories } from "../../redux/transactions/selectorsTransactions";
+
+// Funcții de utilitate
+const formatData = (unixDate) => {
+  const date = new Date(unixDate);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${day}.${month}.${year}`;
+};
+
+const getTransactionCategory = (categoryId, categories) => {
+  const category = categories.find((cat) => cat.id === categoryId);
+  return category ? category.name : "Unknown";
+};
+
+const formatNumberWithSpaces = (number) => {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+};
 
 const TransactionItem = ({ transaction, openDeleteModal, openEditModal }) => {
-  function formatNumberWithSpaces(number) {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-  }
+  const dispatch = useDispatch();
+  const categories = useSelector(selectTransactionCategories);
 
   const { type, categoryId, comment, amount, transactionDate } = transaction;
-
-  const dispatch = useDispatch();
 
   const handleDeleteClick = () => {
     openDeleteModal();
@@ -32,17 +43,9 @@ const TransactionItem = ({ transaction, openDeleteModal, openEditModal }) => {
     );
   };
 
-  let textClass = "";
-  let borderClass = "";
-
-  // Determine class based on data
-  if (type === "INCOME") {
-    textClass = styles.incomeText; // Access class from CSS module
-    borderClass = styles.incomeBorder;
-  } else if (type === "EXPENSE") {
-    textClass = styles.expenseText;
-    borderClass = styles.expenseBorder;
-  }
+  const textClass = type === "INCOME" ? styles.incomeText : styles.expenseText;
+  const borderClass =
+    type === "INCOME" ? styles.incomeBorder : styles.expenseBorder;
 
   return (
     <li className={`${styles.TransactionItem} ${borderClass}`}>
@@ -61,7 +64,7 @@ const TransactionItem = ({ transaction, openDeleteModal, openEditModal }) => {
       <div className={`${styles.row} ${styles.thirdRow}`}>
         <span className={styles.fixData}>Category</span>
         <span className={styles.dynamicData}>
-          {getTransactionCategory(categoryId)}
+          {getTransactionCategory(categoryId, categories)}
         </span>
       </div>
       <div className={`${styles.row} ${styles.forthRow}`}>
@@ -85,8 +88,8 @@ const TransactionItem = ({ transaction, openDeleteModal, openEditModal }) => {
           Delete
         </button>
         <button
-          className={styles.editButton}
           type="button"
+          className={styles.editButton}
           onClick={handleEditClick}
         >
           <svg className={styles.editIcon}>
