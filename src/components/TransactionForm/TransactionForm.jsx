@@ -144,6 +144,22 @@ const TransactionForm = ({ closeModal, isEditMode }) => {
                 </div>
               )}
 
+              <div className={`${styles.inputField} ${styles.amount}`}>
+                <Field type="number" name="amount" min="1" placeholder="0.00" />
+                <ErrorMessage name="amount" component="p" />
+              </div>
+
+              <div className={`${styles.inputField} ${styles.date}`}>
+                <ReactDatePicker
+                  dateFormat="dd.MM.yyyy"
+                  selected={startDate}
+                  onChange={(date) => setStartDate(date)}
+                  locale="en-US"
+                  calendarStartDay={1}
+                />
+                <FiCalendar className={styles.icon} />
+              </div>
+
               <div className={`${styles.inputField} ${styles.comment}`}>
                 <Field type="text" name="comment" placeholder="Comment" />
                 <ErrorMessage name="comment" component="p" />
