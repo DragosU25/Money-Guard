@@ -16,7 +16,8 @@
 
 @media screen and (min-width: 768px) {
   .footer {
-    padding: 30px;
+    padding: 16px 28px 15.53px 32px;
+    height: fit-content;
   }
   .footerText {
     display: flex;

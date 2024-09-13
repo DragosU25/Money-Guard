@@ -127,7 +127,7 @@
   }
 
   .currencyContainer {
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     display: flex;
     width: calc((100% - 32px) / 2);
@@ -142,6 +142,7 @@
     height: -webkit-fill-available;
     padding: 0;
     width: fit-content;
+    width: calc((100vw * 37.5) / 100);
   }
 
   .sidebarLeftContainer {
@@ -156,6 +157,7 @@
   }
 
   .currencyContainer {
+    align-items: inherit;
     width: 100%;
     flex-grow: 1;
     height: fit-content;
