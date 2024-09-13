@@ -9,10 +9,10 @@ import { useStatistics } from "../../hooks/useStatistics";
 
 import styles from "./Chart.module.css";
 import clsx from "clsx";
-import Loader from "../commonComponents/Loader/Loader";
+// import Loader from "../commonComponents/Loader/Loader";
 
 export default function Chart() {
-  const { statisticsTransactions, statisticsLoading } = useStatistics();
+  const { statisticsTransactions } = useStatistics();
 
   const transactionsItems = statisticsTransactions?.categoriesSummary;
 
@@ -156,6 +156,20 @@ export default function Chart() {
     },
   ];
 
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="custom-tooltip">
+          <p className="label">{`${label} : ${payload[0].value}`}</p>
+          {/* <p className="intro">{getIntroOfPage(label)}</p> */}
+          <p className="desc">Anything you want can be displayed here.</p>
+        </div>
+      );
+    }
+
+    return null;
+  };
+
   const textAnimationClasses =
     "animate__animated  animate__zoomIn animate__slow";
 
@@ -163,7 +177,7 @@ export default function Chart() {
     <div className={styles.chartContainer}>
       <ResponsiveContainer width="100%" height="100%">
         <PieChart fill="rgba(255, 255, 255, 0.6)">
-          <Tooltip />
+          <Tooltip content={CustomTooltip} />
           <Pie
             data={data}
             dataKey="value"
@@ -172,7 +186,7 @@ export default function Chart() {
             // paddingAngle={5}
             fill="rgba(255, 255, 255, 0.6)">
             {data.map((entry, index) => {
-              console.log(entry.backgroundColor);
+              //   console.log(entry.backgroundColor);
 
               return <Cell key={entry.name} fill={entry.backgroundColor} />;
             })}

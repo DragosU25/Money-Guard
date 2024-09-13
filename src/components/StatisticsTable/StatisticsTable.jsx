@@ -20,7 +20,7 @@ export default function StatisticsTable() {
     return transaction.type !== "INCOME";
   });
 
-  console.log(expensesItems);
+  //   console.log(expensesItems);
 
   return (
     <div className={styles.tableContainer}>
