@@ -123,6 +123,11 @@
 }
 
 @media screen and (width >= 768px) {
+  .allContainer {
+    height: 100vh;
+    width: 100%;
+  }
+
   .modalLogoutActionCenter {
     border-radius: 8px;
     height: fit-content;
