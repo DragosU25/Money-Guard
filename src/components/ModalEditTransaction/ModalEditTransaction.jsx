@@ -1,4 +1,4 @@
-import TransactionModal from "../TransactionModal/TransactionModal";
+import TransactionModal from "../commonComponents/TransactionModal/TransactionModal";
 
 import { EditTransactionForm } from "../TransactionForm/TransactionForm";
 
