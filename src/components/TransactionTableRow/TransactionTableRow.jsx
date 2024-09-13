@@ -3,10 +3,7 @@ import {
   setTransactionForUpdate,
   setTransactionIdForDelete,
 } from "../../redux/transactions/transactionsSlice";
-import {
-  selectTransactionCategories,
-  selectTransactionById,
-} from "../../redux/transactions/selectorsTransactions";
+import { selectTransactionCategories } from "../../redux/transactions/selectorsTransactions";
 import icons from "../../assets/images/icons/sprite.svg";
 import styles from "./TransactionTableRow.module.css";
 
