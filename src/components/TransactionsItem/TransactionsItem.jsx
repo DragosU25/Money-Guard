@@ -21,8 +21,8 @@ const getTransactionCategory = (categoryId, categories) => {
   return category ? category.name : "Unknown";
 };
 
-const formatNumberWithSpaces = (number) => {
-  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+const formatNumber = (number) => {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 };
 
 const TransactionItem = ({ transaction, openDeleteModal, openEditModal }) => {
@@ -74,9 +74,7 @@ const TransactionItem = ({ transaction, openDeleteModal, openEditModal }) => {
       <div className={`${styles.row} ${styles.fifthRow}`}>
         <span className={styles.fixData}>Sum</span>
         <span className={`${styles.dynamicData} ${textClass}`}>
-          {type === "INCOME"
-            ? formatNumberWithSpaces(amount)
-            : formatNumberWithSpaces(amount * -1)}
+          {type === "INCOME" ? formatNumber(amount) : formatNumber(amount * -1)}
         </span>
       </div>
       <div className={`${styles.row} ${styles.sixthRow}`}>

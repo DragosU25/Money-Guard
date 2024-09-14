@@ -1,7 +1,36 @@
-.mainCont {
+.transactionsList {
+  margin-top: 32px;
   align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 100%;
+  gap: 8px;
+  height: auto;
+  max-height: 55vh;
+  width: 100%;
+  width: 290px;
+  overflow-y: auto;
+  padding: 5px;
+}
+
+.transactionsList > :first-child {
+  margin-top: 1930px; /* Ajustează valoarea în funcție de nevoile tale */
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7000ff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #9e40ba;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(216, 156, 78);
 }

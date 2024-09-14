@@ -32,8 +32,8 @@ const TransactionTableRow = ({
 
   const { type, categoryId, comment, amount, transactionDate } = transaction;
 
-  const formatNumberWithSpaces = (number) => {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  const formatNumber = (number) => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   };
 
   // Găsește categoria tranzacției
@@ -69,9 +69,7 @@ const TransactionTableRow = ({
       </td>
       <td className={styles.TransactionCommentColumn}>{comment}</td>
       <td className={`${styles.TransactionAmountColumn} ${textClass}`}>
-        {type === "INCOME"
-          ? formatNumberWithSpaces(amount)
-          : formatNumberWithSpaces(amount * -1)}
+        {type === "INCOME" ? formatNumber(amount) : formatNumber(amount * -1)}
       </td>
       <td className={styles.TransactionEditColumn}>
         <button

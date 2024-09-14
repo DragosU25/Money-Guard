@@ -1,8 +1,8 @@
 .ButtonOpenModal {
   display: flex;
   position: fixed;
-  bottom: 38px;
-  right: 20px;
+  bottom: 120px;
+  right: 30px;
   justify-content: center;
   align-items: center;
   border: none;
@@ -19,18 +19,4 @@
   transform: scale(1.2);
   background: linear-gradient(95deg, #7000ff -15%, #9e40ba 95%, #ffc727 150%);
   transition: all 0.5s ease 0s;
-}
-
-@media only screen and (min-width: 768px) {
-  .ButtonOpenModal {
-    bottom: 57px;
-    margin-right: 12px;
-  }
-}
-
-@media only screen and (min-width: 1280px) {
-  .ButtonOpenModal {
-    bottom: 57px;
-    margin-right: 0;
-  }
 }

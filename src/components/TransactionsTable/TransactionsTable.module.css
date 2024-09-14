@@ -1,13 +1,14 @@
 .TransactionTable {
-  /* background-color: aquamarine; */
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  overflow-y: auto;
 }
 
 .table {
   border-collapse: collapse;
   width: 100%;
+  margin-top: 46px;
 }
 
 .tableHead {
@@ -55,4 +56,22 @@
 
 .sumColumn {
   min-width: 80px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7000ff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #9e40ba;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(216, 156, 78);
 }

@@ -5,7 +5,7 @@ import { selectTransactions } from "../../redux/transactions/selectorsTransactio
 import TransactionItem from "../TransactionsItem/TransactionsItem";
 import styles from "./TransactionsList.module.css";
 
-const TransactionsList = ({ openEditModal }) => {
+const TransactionsList = ({ openEditModal, openDeleteModal }) => {
   const dispatch = useDispatch();
   const transactions = useSelector(selectTransactions);
 
@@ -20,6 +20,7 @@ const TransactionsList = ({ openEditModal }) => {
           key={transaction.id}
           transaction={transaction}
           openEditModal={openEditModal}
+          openDeleteModal={openDeleteModal}
         />
       ))}
     </div>

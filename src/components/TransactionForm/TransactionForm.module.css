@@ -1,23 +1,20 @@
+.inputField input[type="number"]::-webkit-inner-spin-button,
+.inputField input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .modalContent {
   position: relative;
   width: 100%;
-  max-width: 540px;
   height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-  padding: 40px 20px;
-  box-sizing: border-box; /* Asigură că padding-ul este inclus în dimensiuni */
-}
-
-.modalContent form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 40px;
-  width: 100%;
+  padding: 40px 73px;
+  box-sizing: border-box;
 }
 
 .modalContent .closeButton {
@@ -51,7 +48,6 @@
 .closeButton:hover > svg {
   stroke: red;
 }
-
 .formTitle {
   color: rgba(251, 251, 251, 1);
   font-size: 24px;
@@ -60,33 +56,36 @@
   text-align: center; /* Asigură că titlul este centrat */
 }
 
-.inputWrapper {
-  width: 100%;
+.modalContent form {
   display: flex;
   flex-direction: column;
-  gap: 20px; /* Ajustează gap-ul între inputuri */
+  align-items: center;
+  gap: 40px;
+  max-width: 394px;
+}
+
+.flexContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+
+.inputField select {
+  width: 100%;
 }
 
 .inputWrapper .inputField input,
 .inputWrapper .inputField select {
-  width: 100%;
-  outline: none;
   border: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.4);
   background-color: transparent;
-  padding: 0 20px 8px 20px;
+  width: 100%;
   font-size: 18px;
   font-weight: 600;
   line-height: 27px;
   color: rgba(255, 255, 255, 0.6);
   transition: all 0.35s ease-in-out;
-  position: relative;
-}
-
-.inputWrapper .inputField input[type="number"]::-webkit-inner-spin-button,
-.inputWrapper .inputField input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
 }
 
 .inputWrapper .inputField select {
@@ -99,6 +98,19 @@
   box-shadow: 0px 4px 60px 0px rgba(0, 0, 0, 0.25);
   background-color: rgba(83, 61, 186, 0.7);
   color: rgba(251, 251, 251, 1);
+}
+
+form .inputWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.inputWrapper .inputField input[type="number"]::-webkit-inner-spin-button,
+.inputWrapper .inputField input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .inputField input:focus,
@@ -136,19 +148,20 @@
 
 .inputField.date input:focus {
   color: #ffffff;
+  transition: all 0.5s ease 0s;
 }
 
 .icon {
   position: absolute;
   top: 0;
-  right: 17px;
+  right: 0;
   color: #734aef;
   width: 24px;
   height: 24px;
   pointer-events: none;
 }
 
-.buttonsWrapper {
+form .buttonsWrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -186,6 +199,7 @@
   background: rgba(255, 255, 255, 1);
   position: relative;
   display: block;
+
   cursor: pointer;
   box-shadow: inset 0px 5px 15px rgba(0, 0, 0, 0.4),
     inset 0 -5px 15px rgba(255, 255, 255, 0.4);
@@ -218,7 +232,8 @@
 
 .switcheWrapper input:checked + label:after {
   content: "-";
-  font-size: 35px;
+  font-size: 50px;
+
   left: 84px;
   transform: translateX(-100%);
   background-color: rgba(255, 134, 141, 1);
@@ -229,41 +244,18 @@ label:active::after {
   width: 65px;
 }
 
-@media screen and (min-width: 768px) {
-  .modalContent {
-    padding: 40px 73px;
+@media screen and (max-width: 768px) {
+  .modalContent .closeButton {
+    display: none;
   }
 
-  .formTitle {
-    font-size: 30px;
-    line-height: 45px;
-  }
-
-  .inputWrapper {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 32px;
+  .flexContainer {
+    flex-direction: column;
     row-gap: 40px;
+    margin: 0 auto;
+    max-width: 100%;
   }
-
-  .inputField.category,
-  .inputField.comment {
-    width: 100%;
-  }
-
-  .inputField.amount,
-  .inputField.date {
-    flex: 1;
-  }
-
-  .icon {
-    right: 8px;
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  .formTitle {
-    font-size: 30px;
-    line-height: 45px;
+  .flexContainer .inputField .date {
+    max-width: 280px;
   }
 }

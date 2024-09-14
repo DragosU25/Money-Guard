@@ -12,7 +12,7 @@ import ModalEditTransactionNew from "../ModalEditTransaction/ModalEditTransactio
 import ModalAddTransaction from "../ModalAddTransaction/ModalAddTransaction";
 import Loader from "../commonComponents/Loader/Loader";
 
-const HomePage = () => {
+const TransactionsManager = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -80,4 +80,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default TransactionsManager;

@@ -1,6 +1,4 @@
-
-import styles from './FormButton.module.css';
-
+import styles from "./FormButton.module.css";
 
 const FormButton = ({
   type,
@@ -13,9 +11,7 @@ const FormButton = ({
     <button
       type={type}
       onClick={handlerFunction}
-
       className={`${styles.formButton} ${styles[variant]}`}
-
       disabled={isDisabled}
     >
       {text}
