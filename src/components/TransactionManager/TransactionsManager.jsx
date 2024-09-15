@@ -3,7 +3,7 @@ import { ButtonAddTransactions } from "../ButtonAddTransactions/ButtonAddTransac
 import TransactionsList from "../TransactionsList/TransactionsList";
 import TransactionsTable from "../TransactionsTable/TransactionsTable";
 import { useMediaQuery } from "react-responsive";
-
+import styles from "./TransactionManager.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { selectTransactions } from "../../redux/transactions/selectorsTransactions";
 import { fetchTransactions } from "../../redux/transactions/operationsTransactions";
@@ -41,7 +41,7 @@ const TransactionsManager = () => {
 
   return (
     <>
-      <div className={animation}>
+      <div className={`${styles.HomePage} ${animation}`}>
         {screenCondition ? (
           <TransactionsTable
             data={data}
