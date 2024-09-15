@@ -11,6 +11,9 @@ import ModalDeleteTransaction from "../ModalDeleteTransaction copy/ModalDeleteTr
 import ModalEditTransactionNew from "../ModalEditTransaction/ModalEditTransaction";
 import ModalAddTransaction from "../ModalAddTransaction/ModalAddTransaction";
 import Loader from "../commonComponents/Loader/Loader";
+import clsx from "clsx";
+
+import styles from "./TransactionManager.module.css";
 
 const TransactionsManager = () => {
   const dispatch = useDispatch();
@@ -40,9 +43,30 @@ const TransactionsManager = () => {
   const animation = "animate__animated animate__fadeIn animate__slow";
 
   return (
-    <>
-      <div className={animation}>
+    <div className={styles.transactionManagerMainContainer}>
+      <div
+        className={clsx(styles.transactionsListAndTableContainer, animation)}>
         {screenCondition ? (
+          // <div className={styles.theadContainer}>
+          //   <table className={styles.table}>
+          //     <thead className={styles.tableHead}>
+          //       <tr className={styles.tableHeadRow}>
+          //         <th className={styles.dateColumn}>Date</th>
+          //         <th className={styles.typeColumn}>Type</th>
+          //         <th className={styles.categoryColumn}>Category</th>
+          //         <th className={styles.commentColumn}>Comment</th>
+          //         <th className={styles.sumColumn}>Sum</th>
+          //         <th className={styles.editColumn}></th>
+          //         <th className={styles.deleteColumn}></th>
+          //       </tr>
+          //     </thead>
+          //   </table>
+          //   <TransactionsTable
+          //     data={data}
+          //     openDeleteModal={() => setIsDeleteModalOpen(true)}
+          //     openEditModal={() => setIsEditModalOpen(true)}
+          //   />
+          // </div>
           <TransactionsTable
             data={data}
             openDeleteModal={() => setIsDeleteModalOpen(true)}
@@ -59,7 +83,7 @@ const TransactionsManager = () => {
         <ButtonAddTransactions onClick={() => setIsAddModalOpen(true)} />
       </div>
 
-      <>
+      <div className={styles.transactionManagerModalsContainer}>
         {isAddModalOpen && (
           <ModalAddTransaction closeModal={() => setIsAddModalOpen(false)} />
         )}
@@ -75,8 +99,8 @@ const TransactionsManager = () => {
             closeModal={() => setIsEditModalOpen(false)}
           />
         )}
-      </>
-    </>
+      </div>
+    </div>
   );
 };
 

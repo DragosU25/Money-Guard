@@ -20,3 +20,15 @@
   background: linear-gradient(95deg, #7000ff -15%, #9e40ba 95%, #ffc727 150%);
   transition: all 0.5s ease 0s;
 }
+
+@media screen and (width >= 768px) {
+  .ButtonOpenModal {
+    right: 64px;
+  }
+}
+
+@media screen and (width >= 1024px) {
+  .ButtonOpenModal {
+    right: 37px;
+  }
+}

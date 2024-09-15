@@ -3,7 +3,7 @@ import styles from "./TransactionsTable.module.css";
 
 const TransactionsTable = ({ data, openDeleteModal, openEditModal }) => {
   return (
-    <div className={styles.TransactionsTable}>
+    <div className={styles.transactionsTable}>
       <table className={styles.table}>
         <thead className={styles.tableHead}>
           <tr className={styles.tableHeadRow}>

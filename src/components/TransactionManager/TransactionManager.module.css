@@ -1,13 +1,45 @@
+.transactionManagerMainContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  width: 100%;
+  /* margin: 0; */
+}
+
+.transactionsListAndTableContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: -webkit-fill-available;
+  /* justify-content: center; */
+  width: 100%;
+  /* margin: 0; */
+}
+
+.transactionManagerModalsContainer {
+  margin: 0;
+}
+
+/* .theadContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
 .transactionsTable {
   display: flex;
   justify-content: center;
-  height: calc(100vh - 530px);
+  height: calc(100vh - 520px);
   overflow-y: auto;
   width: 100%;
 }
 
 .table {
   border-collapse: collapse;
+  overflow-y: auto;
   width: 100%;
 }
 
@@ -23,11 +55,16 @@
   font-size: 16px;
   font-weight: 600;
   line-height: 24px;
-}
+} */
 
-.tableBody {
+/* tbody {
+  height: calc(100vh - 520px);
+  overflow: scroll;
+} */
+
+/* .tableBody {
   height: 100%;
-  /* overflow: auto; */
+  overflow: auto;
   margin: 0;
 }
 
@@ -62,11 +99,4 @@
 
 .sumColumn {
   min-width: 80px;
-}
-
-@media screen and (width >= 1024px) {
-  .transactionsTable {
-    height: calc(100vh - 338px);
-    margin-top: 46px;
-  }
-}
+} */

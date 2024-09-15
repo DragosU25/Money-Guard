@@ -13,7 +13,7 @@
   flex-flow: column;
   background: var(--gradient-background);
   flex-grow: 1;
-  overflow: auto;
+  /* overflow: auto; */
   color: white;
   height: 100%;
 }
@@ -171,6 +171,7 @@
   .main {
     flex-direction: row;
     height: -webkit-fill-available;
+    /* width: calc((100vw * 62.5) / 100); */
   }
 
   .dashboardContainer {

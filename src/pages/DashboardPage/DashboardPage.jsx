@@ -32,21 +32,16 @@ function DashboardPage() {
     toggleIsLogoutModalVisible();
   }
 
-  // Safeguard: Ensure `user` is not null before attempting to use it
-  const username = user?.username || "User";
-
   return (
     <div className={styles.allContainer}>
       <Modal
         closeButton={styles.closeButton}
         handleModalClose={toggleIsLogoutModalVisible}
-        isModalVisible={isLogoutModalVisible}
-      >
+        isModalVisible={isLogoutModalVisible}>
         <header className={styles.modalHeader}>
           <LogoContainer className={styles.logoHeaderContainer} />
           <div className={styles.userContainer}>
-
-            <p> {user ? user.username : ""}</p>
+            <p> {user ? user.username : "User"}</p>
 
             <span>|</span>
             <LogoutButton handleLogoutModal={toggleIsLogoutModalVisible} />
@@ -62,8 +57,7 @@ function DashboardPage() {
                 handleLogout();
               }}
               type="button"
-              variant="colored"
-            >
+              variant="colored">
               Logout
             </Button>
             <Button handleClick={toggleIsLogoutModalVisible} type="button">

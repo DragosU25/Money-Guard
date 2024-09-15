@@ -1,13 +1,15 @@
-.transactionsList {
-  margin-top: 32px;
+.transactionsListMainContainer {
+  /* margin-top: 32px; */
   align-items: center;
   display: flex;
+  height: 100%;
   flex-direction: column;
   justify-content: center;
   gap: 8px;
+  min-width: fit-content;
+  margin: 0;
+  padding: 0;
   width: 100%;
-  width: 280px;
-  padding: 0 20px 20px 20px;
 }
 
 ::-webkit-scrollbar {

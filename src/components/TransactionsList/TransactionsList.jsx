@@ -14,7 +14,7 @@ const TransactionsList = ({ openEditModal, openDeleteModal }) => {
   }, [dispatch]);
 
   return (
-    <div className={styles.transactionsList}>
+    <ul className={styles.transactionsListMainContainer}>
       {transactions.map((transaction) => (
         <TransactionItem
           key={transaction.id}
@@ -23,7 +23,7 @@ const TransactionsList = ({ openEditModal, openDeleteModal }) => {
           openDeleteModal={openDeleteModal}
         />
       ))}
-    </div>
+    </ul>
   );
 };
 
