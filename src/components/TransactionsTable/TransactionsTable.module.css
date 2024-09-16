@@ -9,6 +9,7 @@
 .table {
   border-collapse: collapse;
   width: 100%;
+  height: fit-content;
 }
 
 .tableHead {
@@ -26,7 +27,7 @@
 }
 
 .tableBody {
-  height: 100px;
+  height: fit-content;
   margin: 0;
 }
 
