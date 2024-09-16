@@ -49,6 +49,7 @@ const TransactionForm = ({
   const [isOnIncomeTab, setIsOnIncomeTab] = useState(isInitialIncomeTab);
   const screenCondition = useMediaQuery({ query: "(min-width: 768px)" });
   const [startDate, setStartDate] = useState(new Date());
+  const [startValueDate, setStartValueDate] = useState(currentTransactionDate);
 
   const initialValues = {
     amount: "",
@@ -173,8 +174,11 @@ const TransactionForm = ({
                   <ReactDatePicker
                     dateFormat="dd.MM.yyyy"
                     selected={startDate}
-                    onChange={(date) => setStartDate(date)}
-                    value={currentTransactionDate}
+                    onChange={(date) => {
+                      setStartDate(date);
+                      setStartValueDate(date);
+                    }}
+                    value={startValueDate}
                     locale="en-US"
                     calendarStartDay={1}
                     maxDate={new Date()} // Restricționăm selecția datelor din viitor
