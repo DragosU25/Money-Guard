@@ -4,8 +4,10 @@ import {
   setTransactionIdForDelete,
 } from "../../redux/transactions/transactionsSlice";
 import { selectTransactionCategories } from "../../redux/transactions/selectorsTransactions";
+import { fetchTransactionCategories } from "../../redux/transactions/operationsTransactions";
 import icons from "../../assets/images/icons/sprite.svg";
 import styles from "./TransactionTableRow.module.css";
+import { useEffect } from "react";
 
 const TransactionTableRow = ({
   transaction,
@@ -16,17 +18,21 @@ const TransactionTableRow = ({
 
   const formatData = (unixData) => {
     const year = new Date(unixData).getFullYear();
-    const mounth = new Date(unixData).getMonth() + 1;
+    const month = new Date(unixData).getMonth() + 1;
     const day = new Date(unixData).getDate();
 
-    const doubleDigitsFormatMounth = String(mounth).padStart(2, 0);
+    const doubleDigitsFormatMonth = String(month).padStart(2, 0);
     const doubleDigitsFormatDay = String(day).padStart(2, 0);
 
-    return `${doubleDigitsFormatDay}.${doubleDigitsFormatMounth}.${year}`;
+    return `${doubleDigitsFormatDay}.${doubleDigitsFormatMonth}.${year}`;
   };
 
   // Obține categoriile din Redux store
   const categories = useSelector(selectTransactionCategories);
+
+  useEffect(() => {
+    dispatch(fetchTransactionCategories());
+  }, [dispatch]);
 
   if (!transaction) return null;
 
@@ -38,6 +44,9 @@ const TransactionTableRow = ({
 
   // Găsește categoria tranzacției
   const getTransactionCategory = (categoryId) => {
+    if (!categories || categories.length === 0) {
+      return "Loading..."; // Sau alt fallback
+    }
     const category = categories.find((cat) => cat.id === categoryId);
     return category ? category.name : "Unknown";
   };

@@ -17,14 +17,23 @@ const TransactionsTable = ({ data, openDeleteModal, openEditModal }) => {
           </tr>
         </thead>
         <tbody className={styles.tableBody}>
-          {data.map((item) => (
-            <TransactionTableRow
-              key={item.id}
-              transaction={item} // Transmite obiectul tranzacției
-              openDeleteModal={openDeleteModal}
-              openEditModal={openEditModal}
-            />
-          ))}
+          {data.length > 0 ? (
+            data.map((item) => (
+              <TransactionTableRow
+                key={item.id}
+                transaction={item}
+                openDeleteModal={openDeleteModal}
+                openEditModal={openEditModal}
+              />
+            ))
+          ) : (
+            <tr>
+              <td colSpan="7" className={styles.noDataMessage}>
+                Looks like there's nothing here yet! Time to start spending...
+                or maybe saving!
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>
