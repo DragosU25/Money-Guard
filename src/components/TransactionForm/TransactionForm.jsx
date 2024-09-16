@@ -141,7 +141,7 @@ const TransactionForm = ({
             <div className={styles.inputWrapper}>
               {!isOnIncomeTab && (
                 <div className={`${styles.inputField} ${styles.category}`}>
-                  <Field as="select" name="category" autoFocus required>
+                  <Field as="select" name="category" autoFocus={false} required>
                     <option value="">
                       {selectValue ? selectValue : "Select your category"}
                     </option>
