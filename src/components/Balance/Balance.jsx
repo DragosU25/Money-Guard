@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useAuth } from "../../hooks/useAuth";
+import { useDispatch } from "react-redux";
+import { refreshUser } from "../../redux/auth/operationsAuth";
 
 import styles from "./Balance.module.css";
 
 export default function Balance() {
   const { balanceAuth } = useAuth();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
 
   const balance = balanceAuth;
 
