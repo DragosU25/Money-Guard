@@ -125,7 +125,7 @@
   }
 
   .tableItemsContainer {
-    max-height: calc(-579 + 100vh);
+    max-height: calc(-579px + 100vh);
     overflow: auto;
   }
 
