@@ -21,6 +21,7 @@
   align-items: center;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   overflow: auto;
 }
 
@@ -125,7 +126,7 @@
   }
 
   .tableItemsContainer {
-    max-height: calc(-579px + 100vh);
+    max-height: calc(-580px + 100vh);
     overflow: auto;
   }
 
