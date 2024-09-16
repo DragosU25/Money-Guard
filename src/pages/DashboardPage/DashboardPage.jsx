@@ -22,7 +22,6 @@ import styles from "./DashboardPage.module.css";
 function DashboardPage() {
   const [isLogoutModalVisible, toggleIsLogoutModalVisible] = useToggle(false);
   const { user } = useAuth();
-
   const dispatch = useDispatch();
 
   const handleLogout = () => {
@@ -42,7 +41,8 @@ function DashboardPage() {
         <header className={styles.modalHeader}>
           <LogoContainer className={styles.logoHeaderContainer} />
           <div className={styles.userContainer}>
-            <p> {user ? user.username : ""}</p>
+            <p> {user ? user.username : "User"}</p>
+
             <span>|</span>
             <LogoutButton handleLogoutModal={toggleIsLogoutModalVisible} />
           </div>
@@ -61,8 +61,8 @@ function DashboardPage() {
               Logout
             </Button>
             <Button handleClick={toggleIsLogoutModalVisible} type="button">
-              cancel
-            </Button>{" "}
+              Cancel
+            </Button>
           </div>
         </div>
       </Modal>

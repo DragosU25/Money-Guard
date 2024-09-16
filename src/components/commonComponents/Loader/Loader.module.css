@@ -6,4 +6,5 @@
   background: linear-gradient(270deg, #2e1746 3.2%, #2e225f 99.98%);
   position: relative;
   overflow: hidden;
+  width: 100%;
 }

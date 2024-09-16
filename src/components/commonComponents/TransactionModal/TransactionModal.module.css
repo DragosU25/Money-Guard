@@ -1,37 +1,50 @@
-@import "../../styles/variables.css";
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 100;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(34, 13, 91, 0.23);
+
+  backdrop-filter: blur(3.5px);
+}
+
+.modal .isOpen {
+  opacity: 1;
+  transform: scale(1);
+  transition: all 0.35s ease-in-out;
+}
+
+.modalBg {
+  max-width: fit-content;
+  /* form effects */
+  box-shadow: 0px 4px 60px 0px rgba(0, 0, 0, 0.25);
+
+  background: linear-gradient(
+    0deg,
+    rgba(83, 61, 186, 1) 0%,
+    rgba(80, 48, 154, 1) 43.14%,
+    rgba(106, 70, 165, 1) 73.27%,
+    rgba(133, 93, 175, 1) 120.03%
+  );
+  width: 100%;
+
+  height: auto;
+  /* border-radius: 8px; */
+
+  box-sizing: border-box;
+}
 
 .allContainer {
   display: flex;
   flex-flow: column;
-  /* height: 100%; */
+  height: fit-content;
   width: 100%;
-  height: -webkit-fill-available;
-}
-
-.dashboardContainer {
-  display: flex;
-  flex-flow: column;
-  background: var(--gradient-background);
-  flex-grow: 1;
-  /* overflow: auto; */
-  color: white;
-  height: 100%;
-}
-
-.main {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-
-  /* background: rgba(47, 21, 176, 0.73); */
-
-  background: linear-gradient(
-    270deg,
-    var(--secondary-color) 3.2%,
-    var(--primary-color) 99.98%
-  );
-  box-shadow: 0px 4px 60px 0px rgba(0, 0, 0, 0.25);
 }
 
 .modalLogoutActionCenter {
@@ -122,59 +135,22 @@
   width: 100%;
 }
 
-@media screen and (width >= 768px) {
-  .allContainer {
-    height: 100vh;
-    width: 100%;
-  }
-
-  .modalLogoutActionCenter {
-    border-radius: 8px;
-    height: fit-content;
-    padding: 60px 117px;
-    width: fit-content;
-  }
-
-  .modalHeader {
-    display: none;
-  }
-
-  .logoContainer {
+@media screen and (max-width: 768px) {
+  .modal {
+    /* padding-top: 79px; */
+    backdrop-filter: blur(0);
     display: flex;
     flex-direction: column;
-    align-items: center;
   }
-
-  .logoContainer img {
-    width: 35.951px;
-    height: 35.974px;
-  }
-
-  .logoContainer span {
-    color: #fbfbfb;
-    font-size: 26.963px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-  }
-
-  .question {
-    text-align: center;
-    width: fit-content;
-    height: fit-content;
-    margin-bottom: 52px;
-    margin-top: 52px;
+  .modalBg {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
   }
 }
 
-@media screen and (width >= 1024px) {
-  .main {
-    flex-direction: row;
-    height: -webkit-fill-available;
-    /* width: calc((100vw * 62.5) / 100); */
-  }
-
-  .dashboardContainer {
-    height: -webkit-fill-available;
+@media screen and (min-width: 768px) {
+  .modalBg {
+    border-radius: 8px;
   }
 }

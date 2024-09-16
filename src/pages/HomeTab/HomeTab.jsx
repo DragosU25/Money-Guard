@@ -2,7 +2,8 @@ import React from "react";
 import Balance from "../../components/Balance/Balance";
 
 import styles from "./HomeTab.module.css";
-import TransactionsList from "../../components/TransactionsList/TransactionsList";
+// import TransactionsList from "../../components/TransactionsList/TransactionsList";
+import TransactionsManager from "../../components/TransactionManager/TransactionsManager";
 
 export default function HomeTab() {
   return (
@@ -10,7 +11,7 @@ export default function HomeTab() {
       <div className={styles.balanceContainer}>
         <Balance />
       </div>
-      <TransactionsList />
+      <TransactionsManager />
     </div>
   );
 }

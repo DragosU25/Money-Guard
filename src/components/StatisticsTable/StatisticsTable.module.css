@@ -21,6 +21,7 @@
   align-items: center;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   overflow: auto;
 }
 
@@ -116,8 +117,16 @@
     height: -webkit-fill-available;
   }
 
+  .tableTitleContainer span {
+    margin-right: 10px;
+  }
+
+  .tableTotalsItemsContainer {
+    margin-right: 10px;
+  }
+
   .tableItemsContainer {
-    max-height: calc(-650px + 100vh);
+    max-height: calc(-580px + 100vh);
     overflow: auto;
   }
 
