@@ -3,7 +3,7 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.41);
   display: flex;
   justify-content: space-between;
-  padding: 16px;
+  padding: 0 16px;
 
   color: var(--white, #fbfbfb);
   font-family: Poppins;
