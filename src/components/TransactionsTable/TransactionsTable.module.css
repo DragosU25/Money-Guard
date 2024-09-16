@@ -27,7 +27,6 @@
 
 .tableBody {
   height: 100px;
-  /* overflow: auto; */
   margin: 0;
 }
 
@@ -62,6 +61,12 @@
 
 .sumColumn {
   min-width: 80px;
+}
+
+.noDataMessage {
+  text-align: center;
+  font-size: 18px;
+  color: #fff;
 }
 
 @media screen and (width >= 1024px) {
