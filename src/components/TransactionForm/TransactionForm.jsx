@@ -110,7 +110,8 @@ const TransactionForm = ({
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={handleSubmit}>
+        onSubmit={handleSubmit}
+      >
         {({ isSubmitting }) => (
           <Form>
             <h2 className={styles.formTitle}>

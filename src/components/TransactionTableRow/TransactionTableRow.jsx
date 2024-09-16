@@ -77,7 +77,8 @@ const TransactionTableRow = ({
         <button
           className={styles.editButton}
           type="button"
-          onClick={handleEditClick}>
+          onClick={handleEditClick}
+        >
           <svg className={styles.editIcon}>
             <use href={`${icons}#icon-edit`}></use>
           </svg>
@@ -87,7 +88,8 @@ const TransactionTableRow = ({
         <button
           className={styles.deleteButton}
           type="button"
-          onClick={handleDeleteClick}>
+          onClick={handleDeleteClick}
+        >
           Delete
         </button>
       </td>

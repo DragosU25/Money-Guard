@@ -5,7 +5,10 @@ import { useMediaQuery } from "react-responsive";
 import FormButton from "../commonComponents/FormButton/FormButton";
 import Logo from "../commonComponents/Logo/Logo";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteTransaction } from "../../redux/transactions/operationsTransactions";
+import {
+  deleteTransaction,
+  fetchTransactions,
+} from "../../redux/transactions/operationsTransactions";
 import { selectTransactionIdForDelete } from "../../redux/transactions/selectorsTransactions";
 import { toast } from "react-toastify";
 
@@ -25,7 +28,8 @@ const ModalDeleteTransaction = ({ closeModal }) => {
       .then(() => {
         closeModal();
         // Optional: Dispatch a refresh action if needed
-        // dispatch(refreshUser());
+
+        dispatch(fetchTransactions());
       })
       .catch((error) => {
         toast.error("Failed to delete transaction. Please try again.");
