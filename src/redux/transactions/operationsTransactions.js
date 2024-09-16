@@ -10,6 +10,8 @@ export const fetchTransactionCategories = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await axios.get("/api/transaction-categories");
+      // console.log(response.data);
+
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -22,6 +24,8 @@ export const fetchTransactions = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await axios.get("/api/transactions");
+      // console.log(response.data);
+
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

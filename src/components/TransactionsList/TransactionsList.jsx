@@ -1,21 +1,48 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchTransactions } from "../../redux/transactions/operationsTransactions";
+import React from "react";
+import { useSelector } from "react-redux";
 import { selectTransactions } from "../../redux/transactions/selectorsTransactions";
 import TransactionItem from "../TransactionsItem/TransactionsItem";
 import styles from "./TransactionsList.module.css";
 
 const TransactionsList = ({ openEditModal, openDeleteModal }) => {
-  const dispatch = useDispatch();
   const transactions = useSelector(selectTransactions);
+  // console.log(transactions);
 
-  useEffect(() => {
-    dispatch(fetchTransactions());
-  }, [dispatch]);
+  const expensesTransactions = transactions?.filter((transaction) => {
+    return transaction.type !== "INCOME";
+  });
+
+  // console.log(expensesTransactions);
+
+  const expenseTransactionsByDate = expensesTransactions?.sort((a, b) => {
+    return new Date(b.transactionDate) - new Date(a.transactionDate);
+  });
+
+  // console.log(expenseTransactionsByDate);
+
+  const incomeTransactions = transactions?.filter((transaction) => {
+    return transaction.type === "INCOME";
+  });
+
+  // console.log(incomeTransactions);
+
+  const incomeTransactionsByDate = incomeTransactions?.sort((a, b) => {
+    return new Date(b.transactionDate) - new Date(a.transactionDate);
+  });
+
+  // console.log(incomeTransactionsByDate);
+
+  expenseTransactionsByDate.push(...incomeTransactionsByDate);
+
+  const sortedAllTransactions = expenseTransactionsByDate?.sort((a, b) => {
+    return new Date(b.transactionDate) - new Date(a.transactionDate);
+  });
+
+  // console.log(sortedAllTransactions);
 
   return (
     <ul className={styles.transactionsListMainContainer}>
-      {transactions.map((transaction) => (
+      {sortedAllTransactions.map((transaction) => (
         <TransactionItem
           key={transaction.id}
           transaction={transaction}

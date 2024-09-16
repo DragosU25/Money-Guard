@@ -69,14 +69,15 @@ const TransactionTableRow = ({
       </td>
       <td className={styles.TransactionCommentColumn}>{comment}</td>
       <td className={`${styles.TransactionAmountColumn} ${textClass}`}>
-        {type === "INCOME" ? formatNumber(amount) : formatNumber(amount * -1)}
+        {type === "INCOME"
+          ? formatNumber(Number(amount).toFixed(2))
+          : formatNumber(Number(amount * -1).toFixed(2))}
       </td>
       <td className={styles.TransactionEditColumn}>
         <button
           className={styles.editButton}
           type="button"
-          onClick={handleEditClick}
-        >
+          onClick={handleEditClick}>
           <svg className={styles.editIcon}>
             <use href={`${icons}#icon-edit`}></use>
           </svg>
@@ -86,8 +87,7 @@ const TransactionTableRow = ({
         <button
           className={styles.deleteButton}
           type="button"
-          onClick={handleDeleteClick}
-        >
+          onClick={handleDeleteClick}>
           Delete
         </button>
       </td>

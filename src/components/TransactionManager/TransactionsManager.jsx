@@ -24,6 +24,38 @@ const TransactionsManager = () => {
 
   const data = useSelector(selectTransactions);
 
+  const expensesTransactions = data?.filter((transaction) => {
+    return transaction.type !== "INCOME";
+  });
+
+  // console.log(expensesTransactions);
+
+  const expenseTransactionsByDate = expensesTransactions?.sort((a, b) => {
+    return new Date(b.transactionDate) - new Date(a.transactionDate);
+  });
+
+  // console.log(expenseTransactionsByDate);
+
+  const incomeTransactions = data?.filter((transaction) => {
+    return transaction.type === "INCOME";
+  });
+
+  // console.log(incomeTransactions);
+
+  const incomeTransactionsByDate = incomeTransactions?.sort((a, b) => {
+    return new Date(b.transactionDate) - new Date(a.transactionDate);
+  });
+
+  // console.log(incomeTransactionsByDate);
+
+  expenseTransactionsByDate.push(...incomeTransactionsByDate);
+
+  const sortedAllTransactions = expenseTransactionsByDate?.sort((a, b) => {
+    return new Date(b.transactionDate) - new Date(a.transactionDate);
+  });
+
+  // console.log(sortedAllTransactions);
+
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -68,7 +100,7 @@ const TransactionsManager = () => {
           //   />
           // </div>
           <TransactionsTable
-            data={data}
+            data={sortedAllTransactions}
             openDeleteModal={() => setIsDeleteModalOpen(true)}
             openEditModal={() => setIsEditModalOpen(true)}
           />

@@ -105,6 +105,8 @@ const transactionsSlice = createSlice({
         state.error = action.payload;
       })
       .addCase(fetchTransactionCategories.fulfilled, (state, action) => {
+        // console.log(action.payload);
+
         state.isLoading = false;
         state.error = null;
         state.categories = action.payload;

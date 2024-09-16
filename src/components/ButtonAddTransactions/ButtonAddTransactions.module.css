@@ -1,7 +1,7 @@
 .ButtonOpenModal {
   display: flex;
   position: fixed;
-  bottom: 120px;
+  bottom: 130px;
   right: 30px;
   justify-content: center;
   align-items: center;
@@ -23,6 +23,7 @@
 
 @media screen and (width >= 768px) {
   .ButtonOpenModal {
+    bottom: 120px;
     right: 64px;
   }
 }

@@ -6,6 +6,8 @@ import {
   setTransactionIdForDelete,
 } from "../../redux/transactions/transactionsSlice";
 import { selectTransactionCategories } from "../../redux/transactions/selectorsTransactions";
+import { useEffect } from "react";
+import { fetchTransactionCategories } from "../../redux/transactions/operationsTransactions";
 
 // Funcții de utilitate
 const formatData = (unixDate) => {
@@ -27,7 +29,13 @@ const formatNumber = (number) => {
 
 const TransactionItem = ({ transaction, openDeleteModal, openEditModal }) => {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchTransactionCategories());
+  }, [dispatch]);
+
   const categories = useSelector(selectTransactionCategories);
+  // console.log(categories);
 
   const { type, categoryId, comment, amount, transactionDate } = transaction;
 
@@ -64,7 +72,9 @@ const TransactionItem = ({ transaction, openDeleteModal, openEditModal }) => {
       <div className={`${styles.row} ${styles.thirdRow}`}>
         <span className={styles.fixData}>Category</span>
         <span className={styles.dynamicData}>
-          {getTransactionCategory(categoryId, categories)}
+          {type === "INCOME"
+            ? "Income"
+            : getTransactionCategory(categoryId, categories)}
         </span>
       </div>
       <div className={`${styles.row} ${styles.forthRow}`}>
@@ -74,22 +84,22 @@ const TransactionItem = ({ transaction, openDeleteModal, openEditModal }) => {
       <div className={`${styles.row} ${styles.fifthRow}`}>
         <span className={styles.fixData}>Sum</span>
         <span className={`${styles.dynamicData} ${textClass}`}>
-          {type === "INCOME" ? formatNumber(amount) : formatNumber(amount * -1)}
+          {type === "INCOME"
+            ? formatNumber(Number(amount).toFixed(2))
+            : formatNumber(Number(amount * -1).toFixed(2))}
         </span>
       </div>
       <div className={`${styles.row} ${styles.sixthRow}`}>
         <button
           type="button"
           className={styles.deleteButton}
-          onClick={handleDeleteClick}
-        >
+          onClick={handleDeleteClick}>
           Delete
         </button>
         <button
           type="button"
           className={styles.editButton}
-          onClick={handleEditClick}
-        >
+          onClick={handleEditClick}>
           <svg className={styles.editIcon}>
             <use href={`${icons}#icon-edit`}></use>
           </svg>

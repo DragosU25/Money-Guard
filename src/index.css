@@ -1,7 +1,7 @@
 @import-normalize; /* bring in normalize.css styles */
 
 body {
-  height: 100vh;
+  /* height: 100vh; */
   background-color: #101010;
   position: relative;
   margin: 0;
