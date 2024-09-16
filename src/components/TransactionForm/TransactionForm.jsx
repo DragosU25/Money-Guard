@@ -9,8 +9,8 @@ import { refreshUser } from "../../redux/auth/operationsAuth";
 import {
   selectTransactionForUpdate,
   selectTransactionCategories,
+  selectTransactions,
 } from "../../redux/transactions/selectorsTransactions";
-import styles from "./TransactionForm.module.css";
 import FormButton from "../commonComponents/FormButton/FormButton";
 import icons from "../../assets/images/icons/sprite.svg";
 import { useMediaQuery } from "react-responsive";
@@ -21,9 +21,18 @@ import ReactDatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import enUS from "date-fns/locale/en-US";
 
+import styles from "./TransactionForm.module.css";
+
 registerLocale("en-US", enUS);
 
-const TransactionForm = ({ closeModal, isEditMode }) => {
+const TransactionForm = ({
+  closeModal,
+  isEditMode,
+  selectValue,
+  currentTransactionDate,
+  currentTransactionComment,
+  currentTransactionAmount,
+}) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -32,6 +41,7 @@ const TransactionForm = ({ closeModal, isEditMode }) => {
 
   const transactionCategories = useSelector(selectTransactionCategories);
   const transactionForUpdate = useSelector(selectTransactionForUpdate);
+
   const isInitialIncomeTab = isEditMode
     ? transactionForUpdate.type === "INCOME"
     : false;
@@ -99,8 +109,7 @@ const TransactionForm = ({ closeModal, isEditMode }) => {
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
+        onSubmit={handleSubmit}>
         {({ isSubmitting }) => (
           <Form>
             <h2 className={styles.formTitle}>
@@ -133,7 +142,9 @@ const TransactionForm = ({ closeModal, isEditMode }) => {
               {!isOnIncomeTab && (
                 <div className={`${styles.inputField} ${styles.category}`}>
                   <Field as="select" name="category" autoFocus required>
-                    <option value="">Select your category</option>
+                    <option value="">
+                      {selectValue ? selectValue : "Select your category"}
+                    </option>
                     {transactionCategories
                       .filter((cat) => cat.type === "EXPENSE")
                       .map((item) => (
@@ -149,7 +160,11 @@ const TransactionForm = ({ closeModal, isEditMode }) => {
                     type="number"
                     name="amount"
                     min="1"
-                    placeholder="0.00"
+                    placeholder={
+                      currentTransactionAmount
+                        ? Math.abs(currentTransactionAmount).toFixed(2)
+                        : Number(0).toFixed(2)
+                    }
                   />
                   <ErrorMessage name="amount" component="p" />
                 </div>
@@ -159,6 +174,7 @@ const TransactionForm = ({ closeModal, isEditMode }) => {
                     dateFormat="dd.MM.yyyy"
                     selected={startDate}
                     onChange={(date) => setStartDate(date)}
+                    value={currentTransactionDate}
                     locale="en-US"
                     calendarStartDay={1}
                     maxDate={new Date()} // Restricționăm selecția datelor din viitor
@@ -167,7 +183,11 @@ const TransactionForm = ({ closeModal, isEditMode }) => {
                 </div>
               </div>
               <div className={`${styles.inputField} ${styles.comment}`}>
-                <Field type="text" name="comment" placeholder="Comment" />
+                <Field
+                  type="text"
+                  name="comment"
+                  placeholder={currentTransactionComment}
+                />
                 <ErrorMessage name="comment" component="p" />
               </div>
             </div>
@@ -193,9 +213,46 @@ const TransactionForm = ({ closeModal, isEditMode }) => {
   );
 };
 
-export const EditTransactionForm = ({ closeModal }) => (
-  <TransactionForm closeModal={closeModal} isEditMode={true} />
-);
+export const EditTransactionForm = ({ closeModal }) => {
+  const transactionForUpdate = useSelector(selectTransactionForUpdate);
+  console.log(transactionForUpdate);
+
+  const transactions = useSelector(selectTransactions);
+  // console.log(transactions);
+
+  const currentTransaction = transactions?.find(
+    (transaction) => transaction.id === transactionForUpdate.id
+  );
+  console.log(currentTransaction);
+
+  const currentTransactionDate = new Date(
+    currentTransaction.transactionDate
+  ).toLocaleDateString();
+
+  // console.log(currentTransactionDate);
+
+  const categories = useSelector(selectTransactionCategories);
+  // console.log(categories);
+
+  const getTransactionCategory = (categoryId, categories) => {
+    const category = categories.find((cat) => cat.id === categoryId);
+    return category ? category.name : "Unknown";
+  };
+
+  return (
+    <TransactionForm
+      currentTransactionAmount={currentTransaction.amount}
+      currentTransactionComment={currentTransaction.comment}
+      currentTransactionDate={currentTransactionDate}
+      selectValue={getTransactionCategory(
+        currentTransaction.categoryId,
+        categories
+      )}
+      closeModal={closeModal}
+      isEditMode={true}
+    />
+  );
+};
 
 export const AddTransactionForm = ({ closeModal }) => (
   <TransactionForm closeModal={closeModal} isEditMode={false} />
