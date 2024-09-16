@@ -120,6 +120,10 @@
     margin-right: 10px;
   }
 
+  .tableTotalsItemsContainer {
+    margin-right: 10px;
+  }
+
   .tableItemsContainer {
     max-height: calc(-650px + 100vh);
     overflow: auto;
