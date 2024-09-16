@@ -154,7 +154,7 @@ export default function Chart() {
     return ap - bp;
   });
 
-  console.log(sortedData);
+  //   console.log(sortedData);
 
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
@@ -193,8 +193,9 @@ export default function Chart() {
             fill="rgba(255, 255, 255, 0.6)">
             {data.map((entry, index) => {
               //   console.log(entry.backgroundColor);
+              // console.log(entry.name);
 
-              return <Cell key={entry.name} fill={entry.backgroundColor} />;
+              return <Cell key={index} fill={entry.backgroundColor} />;
             })}
           </Pie>
         </PieChart>

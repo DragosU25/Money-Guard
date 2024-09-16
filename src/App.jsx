@@ -76,7 +76,8 @@ function App() {
             path="/"
             element={
               <PrivateRoute redirectTo="/login" component={<DashboardPage />} />
-            }>
+            }
+          >
             <Route path="" element={<LazyHomeTabPage />} />
 
             <Route

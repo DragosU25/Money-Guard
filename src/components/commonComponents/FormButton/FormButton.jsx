@@ -1,4 +1,4 @@
-import styles from './FormButton.module.css';
+import styles from "./FormButton.module.css";
 
 const FormButton = ({
   type,

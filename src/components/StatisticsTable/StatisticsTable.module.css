@@ -116,6 +116,10 @@
     height: -webkit-fill-available;
   }
 
+  .tableTitleContainer span {
+    margin-right: 10px;
+  }
+
   .tableItemsContainer {
     max-height: calc(-650px + 100vh);
     overflow: auto;
