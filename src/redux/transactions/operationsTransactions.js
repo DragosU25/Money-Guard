@@ -38,7 +38,7 @@ export const addTransaction = createAsyncThunk(
   async (transactionData, thunkAPI) => {
     try {
       const response = await axios.post("/api/transactions", transactionData);
-      toast.success("Transaction added successfully!");
+      // toast.success("Transaction added successfully!");
       return response.data;
     } catch (error) {
       const errorNotify =
@@ -57,7 +57,7 @@ export const deleteTransaction = createAsyncThunk(
     try {
       await axios.delete(`/api/transactions/${transactionId}`);
 
-      toast.success("Transaction deleted successfully !");
+      // toast.success("Transaction deleted successfully !");
       return transactionId;
     } catch (error) {
       const errorNotify =
