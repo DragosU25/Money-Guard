@@ -32,6 +32,7 @@ const TransactionForm = ({
   currentTransactionDate,
   currentTransactionComment,
   currentTransactionAmount,
+  required = true,
 }) => {
   const dispatch = useDispatch();
 
@@ -110,8 +111,7 @@ const TransactionForm = ({
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
+        onSubmit={handleSubmit}>
         {({ isSubmitting }) => (
           <Form>
             <h2 className={styles.formTitle}>
@@ -143,7 +143,11 @@ const TransactionForm = ({
             <div className={styles.inputWrapper}>
               {!isOnIncomeTab && (
                 <div className={`${styles.inputField} ${styles.category}`}>
-                  <Field as="select" name="category" autoFocus={false} required>
+                  <Field
+                    required={required}
+                    as="select"
+                    name="category"
+                    autoFocus={false}>
                     <option value="">
                       {selectValue ? selectValue : "Select your category"}
                     </option>
@@ -159,6 +163,8 @@ const TransactionForm = ({
               <div className={styles.flexContainer}>
                 <div className={`${styles.inputField} ${styles.amount}`}>
                   <Field
+                    // validate={false}
+                    required={required}
                     type="number"
                     name="amount"
                     min="1"
@@ -189,6 +195,7 @@ const TransactionForm = ({
               </div>
               <div className={`${styles.inputField} ${styles.comment}`}>
                 <Field
+                  required={required}
                   type="text"
                   name="comment"
                   placeholder={currentTransactionComment}
@@ -228,7 +235,7 @@ export const EditTransactionForm = ({ closeModal }) => {
   const currentTransaction = transactions?.find(
     (transaction) => transaction.id === transactionForUpdate.id
   );
-  console.log(currentTransaction);
+  // console.log(currentTransaction);
 
   const currentTransactionDate = new Date(
     currentTransaction.transactionDate
@@ -255,6 +262,7 @@ export const EditTransactionForm = ({ closeModal }) => {
       )}
       closeModal={closeModal}
       isEditMode={true}
+      // required={false}
     />
   );
 };
