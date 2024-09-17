@@ -79,21 +79,28 @@ function DashboardPage() {
           Notiflix.Notify.success("Transaction added successfully!", {
             position: "center-top",
             borderRadius: "8px",
+            showOnlyTheLastOne: "true",
           })}
         {successsDelete &&
           Notiflix.Notify.success("Transaction deleted successfully!", {
             position: "center-top",
             borderRadius: "8px",
+            showOnlyTheLastOne: "true",
           })}
         {successsUpdate &&
           Notiflix.Notify.success("Transaction updated successfully!", {
             position: "center-top",
             borderRadius: "8px",
+            showOnlyTheLastOne: "true",
           })}
         {successsError &&
           Notiflix.Notify.failure(
             "Ooops...! Operation failed. Please try again later.",
-            { position: "center-top", borderRadius: "8px" }
+            {
+              position: "center-top",
+              borderRadius: "8px",
+              showOnlyTheLastOne: "true",
+            }
           )}
         <Sidebar />
         <div className={styles.dashboardContainer}>
