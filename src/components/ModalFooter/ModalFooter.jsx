@@ -62,7 +62,7 @@ const ModalFooter = ({ closeModal }) => {
               <em className={styles.footerTeamFunction}>Team Lead</em>
               <div className={styles.socialLinks}>
                 <a
-                  href="https://github.com"
+                  href="https://github.com/DragosU25"
                   className={styles.footerGithubIcon}
                   aria-label="GitHub profile"
                   target="_blank"
@@ -70,7 +70,7 @@ const ModalFooter = ({ closeModal }) => {
                   <FaGithub />
                 </a>
                 <a
-                  href="https://www.linkedin.com/"
+                  href="https://www.linkedin.com/in/dragos-ungureanu-83485220b/"
                   className={styles.footerLinkedinIcon}
                   aria-label="LinkedIn profile"
                   target="_blank"
@@ -92,7 +92,7 @@ const ModalFooter = ({ closeModal }) => {
               <em className={styles.footerTeamFunction}>Scrum Master</em>
               <div className={styles.socialLinks}>
                 <a
-                  href="https://github.com/PNM24"
+                  href="https://github.com/turbomatrixxxl"
                   className={styles.footerGithubIcon}
                   aria-label="GitHub profile"
                   target="_blank"
@@ -100,7 +100,7 @@ const ModalFooter = ({ closeModal }) => {
                   <FaGithub />
                 </a>
                 <a
-                  href="https://www.linkedin.com/"
+                  href="https://www.linkedin.com/in/radu-bogdan-naramzoiu-fullstack-developer/"
                   className={styles.footerLinkedinIcon}
                   aria-label="LinkedIn profile"
                   target="_blank"
