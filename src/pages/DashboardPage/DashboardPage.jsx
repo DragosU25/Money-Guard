@@ -27,7 +27,7 @@ function DashboardPage() {
   const dispatch = useDispatch();
   const { successAdd, successsDelete, successsUpdate, successsError } =
     useTransactionsSucces();
-  console.log(successAdd);
+  // console.log(successAdd);
 
   const handleLogout = () => {
     dispatch(logOut());
