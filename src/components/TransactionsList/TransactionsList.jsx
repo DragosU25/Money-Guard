@@ -42,7 +42,7 @@ const TransactionsList = ({ openEditModal, openDeleteModal }) => {
 
   return (
     <ul className={styles.transactionsListMainContainer}>
-      {transactions.lenth > 0 ? (
+      {transactions.length > 0 ? (
         sortedAllTransactions.map((transaction) => (
           <TransactionItem
             key={transaction.id}

@@ -11,6 +11,9 @@ const initialState = {
   categories: [],
   items: [],
   isLoading: false,
+  successDelete: false,
+  successAdd: false,
+  successUpdate: false,
   error: null,
   summary: [],
   trasactionIdForDelete: "",
@@ -43,6 +46,9 @@ const transactionsSlice = createSlice({
       })
       .addCase(addTransaction.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.successDelete = false;
+        state.successAdd = true;
+        state.successUpdate = false;
         state.error = null;
         state.items.push(action.payload);
       })
@@ -57,6 +63,9 @@ const transactionsSlice = createSlice({
       })
       .addCase(deleteTransaction.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.successDelete = true;
+        state.successAdd = false;
+        state.successUpdate = false;
         state.error = null;
         state.items = state.items.filter(
           (transaction) => transaction.id !== action.payload.id
@@ -73,6 +82,9 @@ const transactionsSlice = createSlice({
       })
       .addCase(updateTransaction.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.successDelete = false;
+        state.successAdd = false;
+        state.successUpdate = true;
         state.error = null;
         const index = state.items.findIndex(
           (transaction) => transaction.id === action.payload.id
