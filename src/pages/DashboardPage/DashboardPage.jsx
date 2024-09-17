@@ -76,25 +76,24 @@ function DashboardPage() {
       <Header handleLogoutModal={handleLogoutModal} />
       <main className={styles.main}>
         {successAdd &&
-          Notiflix.Notify.success(
-            "Success !",
-            "Transaction added successfully!",
-            { position: "center-top", borderRadius: "8px" }
-          )}
+          Notiflix.Notify.success("Transaction added successfully!", {
+            position: "center-top",
+            borderRadius: "8px",
+          })}
         {successsDelete &&
-          Notiflix.Report.success(
-            "Success !",
-            "Transaction deleted successfully!"
-          )}
+          Notiflix.Notify.success("Transaction deleted successfully!", {
+            position: "center-top",
+            borderRadius: "8px",
+          })}
         {successsUpdate &&
-          Notiflix.Report.success(
-            "Success !",
-            "Transaction updated successfully!"
-          )}
+          Notiflix.Notify.success("Transaction updated successfully!", {
+            position: "center-top",
+            borderRadius: "8px",
+          })}
         {successsError &&
-          Notiflix.Report.failure(
-            "Failure",
-            "Ooops...! Operation failed. Please try again later."
+          Notiflix.Notify.failure(
+            "Ooops...! Operation failed. Please try again later.",
+            { position: "center-top", borderRadius: "8px" }
           )}
         <Sidebar />
         <div className={styles.dashboardContainer}>
