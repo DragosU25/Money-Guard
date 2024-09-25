@@ -24,8 +24,6 @@ const initialState = {
 };
 
 const handlePending = (state) => {
-  state.summary = [];
-  state.categories = [];
   state.isLoading = true;
   state.successDelete = false;
   state.successAdd = false;
@@ -34,8 +32,6 @@ const handlePending = (state) => {
 };
 
 const handleRejected = (state, action) => {
-  state.summary = [];
-  state.categories = [];
   state.isLoading = false;
   state.successDelete = false;
   state.successAdd = false;
